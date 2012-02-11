@@ -1,0 +1,16 @@
+# ocamldoc prints its help to stderr, which the automatic argument
+# detection of findlib does not check.  As a consequence, findlib
+# does not recognize any command line option of ocamldoc.  To fix
+# this, redirect stderr to stdout.
+
+--- findlib-1.2.6.old/tools/extract_args/extract_args.ml	2010-08-17 20:50:28.000000000 +0200
++++ findlib-1.2.6.new/tools/extract_args/extract_args.ml	2011-04-22 17:33:34.545538253 +0200
+@@ -29,7 +29,7 @@
+   let help_out =
+     try
+       let code =
+-	Sys.command (sprintf "%s -help >%s" 
++	Sys.command (sprintf "%s -help >%s 2>&1" 
+ 		       cmd
+ 		       (Filename.quote temp_file)) in
+       if code <> 0 then 

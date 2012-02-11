@@ -1,0 +1,14 @@
+# The configure script of findlib does not find ocaml's man pages,
+# which are located in /usr/share/man/*.
+
+--- findlib-1.2.6.old/configure	2010-08-17 20:50:28.000000000 +0200
++++ findlib-1.2.6.new/configure	2011-02-20 17:02:10.902206012 +0100
+@@ -266,7 +266,7 @@
+ # Find the directory for the manual:
+
+ # Fallback:
+-ocaml_core_man=/usr/local/man
++ocaml_core_man=/usr/share/man
+
+ d="$ocaml_core_bin"
+ while [ "$d" != '/' ]; do

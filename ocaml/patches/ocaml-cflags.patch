@@ -1,0 +1,15 @@
+# Add C compiler flags supplied by the build environment through the
+# CFLAGS variable.
+
+--- ocaml-3.12.0.old/configure	2010-07-28 15:18:22.000000000 +0200
++++ ocaml-3.12.0.new/configure	2011-02-20 17:21:44.924119000 +0100
+@@ -1589,6 +1589,9 @@
+     nativecccompopts="$nativecccompopts -fomit-frame-pointer";;
+ esac
+
++bytecccompopts="$bytecccompopts $CFLAGS"
++nativecccompopts="$nativecccompopts $CFLAGS"
++
+ # Finish generated files
+
+ cclibs="$cclibs $mathlib"

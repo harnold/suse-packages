@@ -4,8 +4,7 @@
 Name:             ocaml
 Summary:          The OCaml compiler and programming environment
 Version:          %{ocamlver}.%{ocamlrel}
-Release:          2
-Vendor:           http://harnold.org/
+Release:          3
 License:          QPLv1.0, LGPLv2 with exceptions
 Group:            Development/Languages/Other
 Url:              http://caml.inria.fr/ocaml

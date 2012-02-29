@@ -5,8 +5,7 @@
 Name:             lua-logging
 Summary:          A simple API to use logging features in Lua
 Version:          1.1.4
-Release:          1
-Vendor:           http://harnold.org/
+Release:          2
 License:          MIT
 Group:            Development/Libraries/Other
 Url:              http://www.keplerproject.org/lualogging/

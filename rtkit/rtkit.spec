@@ -1,8 +1,7 @@
 Name:             rtkit
 Summary:          Realtime Policy and Watchdog Daemon
 Version:          0.10
-Release:          1
-Vendor:           http://harnold.org/
+Release:          2
 License:          GPLv3+; BSD
 Group:            System/Base
 Url:              http://git.0pointer.de/?p=rtkit.git

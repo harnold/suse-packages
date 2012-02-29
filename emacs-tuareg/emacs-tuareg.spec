@@ -3,8 +3,7 @@
 Name:             emacs-%{pkg}
 Summary:          OCaml editing mode for Emacs
 Version:          2.0.4
-Release:          3
-Vendor:           http://harnold.org/
+Release:          4
 License:          GPLv2+
 Group:            Productivity/Editors/Emacs
 Url:              http://tuareg.forge.ocamlcore.org/

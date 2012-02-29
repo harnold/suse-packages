@@ -5,8 +5,7 @@
 Name:             luadoc
 Summary:          Documentation generator for Lua
 Version:          3.0.1
-Release:          1
-Vendor:           http://harnold.org/
+Release:          2
 License:          MIT
 Group:            Development/Languages/Other
 Url:              http://keplerproject.github.com/luadoc/

@@ -3,8 +3,7 @@
 Name:             emacs-%{pkg}
 Summary:          Emacs interface to Git
 Version:          1.0.0
-Release:          3
-Vendor:           http://harnold.org/
+Release:          4
 License:          GPLv3+, GFDLv1.2+
 Group:            Productivity/Editors/Emacs
 Url:              http://philjackson.github.com/magit/

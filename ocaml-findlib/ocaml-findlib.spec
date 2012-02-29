@@ -3,8 +3,7 @@
 Name:             ocaml-%{pkg}
 Summary:          Library manager for Objective Caml
 Version:          1.2.7
-Release:          1
-Vendor:           http://holgerarnold.net/software/
+Release:          2
 License:          see LICENSE for details
 Group:            Development/Languages/Other
 Url:              http://projects.camlcity.org/projects/findlib.html

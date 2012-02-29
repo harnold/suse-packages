@@ -5,8 +5,7 @@
 Name:             lua-filesystem
 Summary:          File system library for the Lua programming language
 Version:          1.5.0
-Release:          1
-Vendor:           http://harnold.org/
+Release:          2
 License:          MIT
 Group:            Development/Libraries/Other
 Url:              http://www.keplerproject.org/luafilesystem/

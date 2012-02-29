@@ -1,8 +1,7 @@
 Name:             emacs
 Summary:          The GNU Emacs text editor
 Version:          24.0.93
-Release:          2
-Vendor:           http://harnold.org/
+Release:          3
 License:          GPLv3+
 Group:            Productivity/Editors/Emacs
 Url:              http://www.gnu.org/software/emacs/

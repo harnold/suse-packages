@@ -2,13 +2,12 @@
 
 Name:             ocaml-%{pkg}
 Summary:          Library manager for Objective Caml
-Version:          1.2.7
-Release:          2
+Version:          1.2.8
+Release:          1
 License:          see LICENSE for details
 Group:            Development/Languages/Other
 Url:              http://projects.camlcity.org/projects/findlib.html
 Source:           http://download.camlcity.org/download/%{pkg}-%{version}.tar.gz
-Patch0:           findlib-ocamldoc.patch
 Patch1:           findlib-manpath.patch
 BuildRoot:        %{_tmppath}/%{name}-%{version}-build
 BuildRequires:    ocaml
@@ -29,7 +28,6 @@ simplify the usage of libraries.
 
 %prep
 %setup -n %{pkg}-%{version}
-%patch -P 0 -p1
 %patch -P 1 -p1
 
 %build

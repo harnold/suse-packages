@@ -3,8 +3,8 @@
 
 Name:             taskwarrior
 Summary:          Command-line todo list manager
-Version:          %{pkgver}.beta4
-Release:          2
+Version:          %{pkgver}.beta5
+Release:          1
 License:          MIT
 Group:            Productivity/Other
 Url:              http://taskwarrior.org/

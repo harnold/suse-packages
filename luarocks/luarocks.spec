@@ -5,8 +5,8 @@
 
 Name:             luarocks
 Summary:          Deployment and management system for Lua modules
-Version:          2.0.6
-Release:          2
+Version:          2.0.8
+Release:          1
 License:          MIT
 Group:            Development/Languages/Other
 Url:              http://luarocks.org/

@@ -1,3 +1,8 @@
+# Copyright 2011, 2012 Holger Arnold.
+#
+# This file is distributed under the Boost Software License, Version 1.0,
+# as published at http://www.boost.org/LICENSE_1_0.txt.
+
 %global pkg magit
 
 Name:             emacs-%{pkg}

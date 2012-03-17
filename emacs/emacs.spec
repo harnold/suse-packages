@@ -1,3 +1,8 @@
+# Copyright 2011, 2012 Holger Arnold.
+#
+# This file is distributed under the Boost Software License, Version 1.0,
+# as published at http://www.boost.org/LICENSE_1_0.txt.
+
 Name:             emacs
 Summary:          The GNU Emacs text editor
 Version:          24.0.94

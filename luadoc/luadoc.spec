@@ -1,3 +1,8 @@
+# Copyright 2011, 2012 Holger Arnold.
+#
+# This file is distributed under the Boost Software License, Version 1.0,
+# as published at http://www.boost.org/LICENSE_1_0.txt.
+
 %global luaver 5.1
 %global lua_libdir %{_libdir}/lua/%{luaver}
 %global lua_pkgdir %{_datadir}/lua/%{luaver}

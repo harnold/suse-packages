@@ -1,3 +1,8 @@
+# Copyright 2009-2012 Holger Arnold.
+#
+# This file is distributed under the Boost Software License, Version 1.0,
+# as published at http://www.boost.org/LICENSE_1_0.txt.
+
 %global ocamlver 3.12
 %global ocamlrel 1
 

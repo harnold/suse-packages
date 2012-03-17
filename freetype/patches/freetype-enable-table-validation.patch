@@ -1,0 +1,20 @@
+--- freetype-2.4.8.old/modules.cfg	2010-12-31 16:46:35.000000000 +0100
++++ freetype-2.4.8.new/modules.cfg	2012-03-01 18:54:22.721757266 +0100
+@@ -110,7 +110,7 @@
+ AUX_MODULES += cache
+ 
+ # TrueType GX/AAT table validation.  Needs ftgxval.c below.
+-# AUX_MODULES += gxvalid
++AUX_MODULES += gxvalid
+ 
+ # Support for streams compressed with gzip (files with suffix .gz).
+ #
+@@ -129,7 +129,7 @@
+ 
+ # OpenType table validation.  Needs ftotval.c below.
+ #
+-# AUX_MODULES += otvalid
++AUX_MODULES += otvalid
+ 
+ # Auxiliary PostScript driver component to share common code.
+ #

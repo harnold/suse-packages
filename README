@@ -1,5 +1,5 @@
-The spec files and patches in this repository can be used to build RPM
-packages for the current release of the openSUSE distribution.
+This repository contains spec files and patches for building RPM packages
+for the openSUSE distribution and some of its derivatives.
 
-The files are distributed under the Boost Software License, Version 1.0.
-See the LICENSE file for details.
+All files in this repository are distributed under the Boost Software
+License, Version 1.0.  See the LICENSE file for details.

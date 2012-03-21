@@ -6,11 +6,11 @@
 Name:             rtkit
 Summary:          Realtime Policy and Watchdog Daemon
 Version:          0.10
-Release:          2
+Release:          3
 License:          GPLv3+; BSD
 Group:            System/Base
 Url:              http://git.0pointer.de/?p=rtkit.git
-Source:           %{name}-%{version}.tar.bz2
+Source:           http://0pointer.de/public/%{name}-%{version}.tar.gz
 BuildRoot:        %{_tmppath}/%{name}-%{version}-build
 BuildRequires:    dbus-1-devel
 BuildRequires:    libcap-devel

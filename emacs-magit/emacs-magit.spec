@@ -9,7 +9,7 @@ Name:             emacs-%{pkg}
 Summary:          Emacs interface to Git
 Version:          1.1.1
 Release:          1
-License:          GPLv3+, GFDLv1.2+
+License:          GPL-3.0+ and GFDL-1.2+
 Group:            Productivity/Editors/Emacs
 Url:              http://philjackson.github.com/magit/
 Source:           http://github.com/downloads/magit/magit/%{pkg}-%{version}.tar.gz

@@ -7,7 +7,7 @@ Name:             emacs
 Summary:          The GNU Emacs text editor
 Version:          24.0.94
 Release:          1
-License:          GPLv3+
+License:          GPL-3.0+
 Group:            Productivity/Editors/Emacs
 Url:              http://www.gnu.org/software/emacs/
 # Source0:          http://ftp.gnu.org/pub/gnu/emacs/emacs-%{version}.tar.gz

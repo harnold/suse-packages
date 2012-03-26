@@ -7,7 +7,7 @@ Name:             rtkit
 Summary:          Realtime Policy and Watchdog Daemon
 Version:          0.10
 Release:          3
-License:          GPLv3+; BSD
+License:          GPL-3.0+ and MIT
 Group:            System/Base
 Url:              http://git.0pointer.de/?p=rtkit.git
 Source:           http://0pointer.de/public/%{name}-%{version}.tar.gz

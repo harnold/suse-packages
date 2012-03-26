@@ -9,7 +9,7 @@ Name:             ocaml-%{pkg}
 Summary:          Library manager for Objective Caml
 Version:          1.2.8
 Release:          1
-License:          see LICENSE for details
+License:          MIT
 Group:            Development/Languages/Other
 Url:              http://projects.camlcity.org/projects/findlib.html
 Source:           http://download.camlcity.org/download/%{pkg}-%{version}.tar.gz

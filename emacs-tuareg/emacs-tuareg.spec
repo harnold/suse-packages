@@ -9,7 +9,7 @@ Name:             emacs-%{pkg}
 Summary:          OCaml editing mode for Emacs
 Version:          2.0.4
 Release:          4
-License:          GPLv2+
+License:          GPL-2.0+
 Group:            Productivity/Editors/Emacs
 Url:              http://tuareg.forge.ocamlcore.org/
 Source0:          https://forge.ocamlcore.org/frs/download.php/514/%{pkg}-%{version}.tgz

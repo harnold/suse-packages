@@ -10,7 +10,7 @@ Name:             ocaml
 Summary:          The OCaml compiler and programming environment
 Version:          %{ocamlver}.%{ocamlrel}
 Release:          3
-License:          QPLv1.0, LGPLv2 with exceptions
+License:          QPL-1.0 with exceptions and LGPL-2.0 with exceptions
 Group:            Development/Languages/Other
 Url:              http://caml.inria.fr/ocaml
 Source0:          http://caml.inria.fr/pub/distrib/ocaml-%{ocamlver}/ocaml-%{version}.tar.gz

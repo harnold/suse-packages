@@ -4,17 +4,16 @@
 # as published at http://www.boost.org/LICENSE_1_0.txt.
 
 %global pkg     task
-%global pkgver  2.0.0
 
 Name:             taskwarrior
 Summary:          Command-line todo list manager
-Version:          %{pkgver}.beta5
+Version:          2.0.0
 Release:          1
 License:          MIT
 Group:            Productivity/Other
 Url:              http://taskwarrior.org/
 Source0:          http://www.taskwarrior.org/download/%{pkg}-%{version}.tar.gz
-Source1:          http://www.taskwarrior.org/download/%{pkg}-%{pkgver}.ref.pdf
+Source1:          http://www.taskwarrior.org/download/%{pkg}-%{version}.ref.pdf
 BuildRoot:        %{_tmppath}/%{name}-%{version}-build
 BuildRequires:    cmake
 BuildRequires:    lua-devel >= 5.1

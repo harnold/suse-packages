@@ -1,5 +1,18 @@
-This repository contains spec files and patches for building RPM packages
-for the openSUSE distribution and some of its derivatives.
+This repository contains spec files and patches that can be used to build
+RPM packages for the openSUSE distribution and some of its derivatives.
 
-All files in this repository are distributed under the Boost Software
-License, Version 1.0.  See the LICENSE file for details.
+A package can be in this repository for one or more of the following
+reasons:
+
+1. the current openSUSE distribution does not provide a version of the
+   package; or
+
+2. I need a different version or a different configuration of the package
+   than the one provided by the current openSUSE distribution; or
+
+3. the version of the package in the current openSUSE distribution contains
+   a bug that annoys me and that will not be fixed before the next release
+   of the distribution.
+
+All files in this repository are licensed under the zlib license; see the
+LICENSE file for details.

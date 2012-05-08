@@ -20,7 +20,7 @@
 
 Name:             ocaml-%{pkg}
 Summary:          Library manager for Objective Caml
-Version:          1.2.8
+Version:          1.3.1
 Release:          1
 License:          MIT
 Group:            Development/Languages/Other

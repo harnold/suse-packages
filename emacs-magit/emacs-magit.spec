@@ -22,7 +22,7 @@
 Name:             emacs-%{pkg}
 Summary:          Emacs interface to Git
 Version:          1.1.1
-Release:          1
+Release:          2
 License:          GPL-3.0+ and GFDL-1.2+
 Group:            Productivity/Editors/Emacs
 Url:              http://philjackson.github.com/magit/
@@ -31,7 +31,6 @@ BuildRoot:        %{_tmppath}/%{name}-%{version}-build
 BuildArch:        noarch
 BuildRequires:    emacs
 BuildRequires:    texinfo
-BuildRequires:    python-markdown
 Requires(post):   info
 Requires(preun):  info
 Requires:         emacs
@@ -54,7 +53,7 @@ emacs --no-init-file --no-site-file --batch \
 makeinfo magit.texi
 gzip magit.info
 makeinfo --html --no-split magit.texi
-markdown README.md > README.html
+mv README.md README
 
 %install
 install -d %{buildroot}%{emacs_lispdir}/%{pkg}
@@ -75,7 +74,7 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-%doc README.html magit.html
+%doc README magit.html
 %doc %{_infodir}/magit.info.gz
 %{emacs_startdir}/*.el
 %{emacs_lispdir}/%{pkg}/*.elc

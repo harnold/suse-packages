@@ -17,21 +17,20 @@
 # ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.
 
-%global ocamlver 3.12
-%global ocamlrel 1
+%global ocamlver 4.00
+%global ocamlrel 0
 
 Name:             ocaml
 Summary:          The OCaml compiler and programming environment
 Version:          %{ocamlver}.%{ocamlrel}
-Release:          3
+Release:          1
 License:          QPL-1.0 with exceptions and LGPL-2.0 with exceptions
 Group:            Development/Languages/Other
 Url:              http://caml.inria.fr/ocaml
 Source0:          http://caml.inria.fr/pub/distrib/ocaml-%{ocamlver}/ocaml-%{version}.tar.gz
-Source1:          http://caml.inria.fr/pub/distrib/ocaml-%{ocamlver}/ocaml-%{ocamlver}-refman.html.tar.gz
+Source1:          http://caml.inria.fr/pub/distrib/ocaml-%{ocamlver}/ocaml-%{ocamlver}-refman-html.tar.gz
 Source2:          http://caml.inria.fr/pub/distrib/ocaml-%{ocamlver}/ocaml-%{ocamlver}-refman.info.tar.gz
 Patch0:           ocaml-cflags.patch
-Patch1:           ocaml-info-dir.patch
 BuildRoot:        %{_tmppath}/%{name}-%{version}-build
 BuildRequires:    binutils-devel
 BuildRequires:    ncurses-devel
@@ -94,9 +93,6 @@ library.
 %setup -q -T -D -a 1
 %setup -q -T -D -a 2
 %patch -P 0 -p1
-gunzip infoman/ocaml.info.gz
-%patch -P 1 -p1
-gzip -9 infoman/ocaml.info
 
 %build
 CFLAGS="%{optflags}" ./configure \

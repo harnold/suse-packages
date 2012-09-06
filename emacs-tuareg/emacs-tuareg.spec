@@ -26,8 +26,8 @@ Release:          4
 License:          GPL-2.0+
 Group:            Productivity/Editors/Emacs
 Url:              http://tuareg.forge.ocamlcore.org/
-Source0:          https://forge.ocamlcore.org/frs/download.php/514/%{pkg}-%{version}.tgz
-Source1:          https://forge.ocamlcore.org/frs/download.php/516/tuareg-caml-mode.tar.gz
+Source0:          http://forge.ocamlcore.org/frs/download.php/514/%{pkg}-%{version}.tgz
+Source1:          http://forge.ocamlcore.org/frs/download.php/516/tuareg-caml-mode.tar.gz
 BuildRoot:        %{_tmppath}/%{name}-%{version}-build
 BuildArch:        noarch
 BuildRequires:    emacs

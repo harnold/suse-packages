@@ -21,7 +21,7 @@
 
 Name:             ocaml-%{pkg}
 Summary:          Library manager for Objective Caml
-Version:          1.3.1
+Version:          1.3.3
 Release:          1
 License:          MIT
 Group:            Development/Languages/Other
@@ -34,8 +34,6 @@ BuildRequires:    ocaml-camlp4
 BuildRequires:    ocaml-labltk
 BuildRequires:    ncurses-devel
 Requires:         ocaml
-Requires:         ocaml-camlp4
-Requires:         ocaml-labltk
 
 %description
 Findlib is a library manager for Objective Caml.  It defines a scheme for

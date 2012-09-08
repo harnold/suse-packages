@@ -19,12 +19,12 @@
 
 Name:             emacs
 Summary:          The GNU Emacs text editor
-Version:          24.1
+Version:          24.2
 Release:          1
 License:          GPL-3.0+
 Group:            Productivity/Editors/Emacs
 Url:              http://www.gnu.org/software/emacs/
-Source0:          http://ftp.gnu.org/pub/gnu/emacs/emacs-%{version}.tar.bz2
+Source0:          http://ftp.gnu.org/pub/gnu/emacs/emacs-%{version}.tar.xz
 Source1:          site-start.el
 BuildRoot:        %{_tmppath}/%{name}-%{version}-build
 BuildRequires:    texinfo

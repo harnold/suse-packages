@@ -20,7 +20,7 @@
 Name:             rtkit
 Summary:          Realtime Policy and Watchdog Daemon
 Version:          0.11
-Release:          1
+Release:          2
 License:          GPL-3.0+ and MIT
 Group:            System/Base
 Url:              http://git.0pointer.de/?p=rtkit.git
@@ -29,9 +29,10 @@ BuildRoot:        %{_tmppath}/%{name}-%{version}-build
 BuildRequires:    dbus-1-devel
 BuildRequires:    libcap-devel
 BuildRequires:    polkit-devel
+BuildRequires:    systemd
 Requires:         polkit
 Requires:         dbus-1
-Requires:         systemd
+%{?systemd_requires}
 
 %description
 RealtimeKit is a D-Bus system service that changes the scheduling
@@ -42,14 +43,15 @@ a safe way to enable real-time scheduling for unprivileged processes.
 %setup -q
 
 %build
-%configure --docdir=%{_defaultdocdir} \
-           --with-systemdsystemunitdir=/lib/systemd/system
+%configure \
+    --docdir=%{_defaultdocdir} \
+    --libexecdir=%{_libexecdir}/rtkit \
+    --with-systemdsystemunitdir=%{_unitdir}
 make %{?_smp_mflags}
 ./rtkit-daemon --introspect > org.freedesktop.RealtimeKit1.xml
 
 %install
 %make_install
-./rtkit-daemon --introspect > org.freedesktop.RealtimeKit1.xml
 install -D org.freedesktop.RealtimeKit1.xml \
     %{buildroot}%{_datadir}/dbus-1/interfaces/org.freedesktop.RealtimeKit1.xml
 
@@ -60,32 +62,29 @@ rm -rf %{buildroot}
 groupadd -r rtkit &>/dev/null || :
 /usr/bin/id rtkit >/dev/null 2>&1 || \
     useradd -r -g rtkit -c 'RealtimeKit' -s /bin/false -d /proc rtkit
+%service_add_pre rtkit-daemon.service
 
 %post
-if [ $1 -eq 1 ]; then
-    /bin/systemctl enable rtkit.service >/dev/null 2>&1 || :
-fi
+%service_add_post rtkit-daemon.service
 dbus-send --system --type=method_call --dest=org.freedesktop.DBus / org.freedesktop.DBus.ReloadConfig >/dev/null 2>&1 || :
 
 %preun
-if [ "$1" -eq 0 ]; then
-    /bin/systemctl --no-reload disable rtkit-daemon.service >/dev/null 2>&1 || :
-    /bin/systemctl stop rtkit-daemon.service >/dev/null 2>&1 || :
-fi
+%service_del_preun rtkit-daemon.service
 
 %postun
-/bin/systemctl daemon-reload >/dev/null 2>&1 || :
+%service_del_postun rtkit-daemon.service
 
 %files
 %defattr(0644,root,root,0755)
 %doc README GPL LICENSE rtkit.c rtkit.h
 %attr(0755,root,root) %{_sbindir}/rtkitctl
-%attr(0755,root,root) %{_libexecdir}/rtkit-daemon
+%dir %{_libexecdir}/rtkit
+%attr(0755,root,root) %{_libexecdir}/rtkit/rtkit-daemon
 %{_datadir}/dbus-1/system-services/org.freedesktop.RealtimeKit1.service
 %{_datadir}/dbus-1/interfaces/org.freedesktop.RealtimeKit1.xml
 %{_datadir}/polkit-1/actions/org.freedesktop.RealtimeKit1.policy
 %config(noreplace) %{_sysconfdir}/dbus-1/system.d/org.freedesktop.RealtimeKit1.conf
-/lib/systemd/system/rtkit-daemon.service
+%{_unitdir}/rtkit-daemon.service
 %{_mandir}/man8/*
 
 %changelog

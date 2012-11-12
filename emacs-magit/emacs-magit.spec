@@ -21,8 +21,8 @@
 
 Name:             emacs-%{pkg}
 Summary:          Emacs interface to Git
-Version:          1.1.1
-Release:          2
+Version:          1.2.0
+Release:          1
 License:          GPL-3.0+ and GFDL-1.2+
 Group:            Productivity/Editors/Emacs
 Url:              http://philjackson.github.com/magit/
@@ -47,9 +47,7 @@ It provides convenient access to the most common Git operations.
 %setup -q -n %{pkg}-%{version}
 
 %build
-emacs --no-init-file --no-site-file --batch \
-      --eval "(push (expand-file-name \".\") load-path)" \
-      -f batch-byte-compile *.el
+make PREFIX=/usr
 makeinfo magit.texi
 gzip magit.info
 makeinfo --html --no-split magit.texi
@@ -58,10 +56,13 @@ mv README.md README
 %install
 install -d %{buildroot}%{emacs_lispdir}/%{pkg}
 install -m 644 magit*.el{c,} %{buildroot}%{emacs_lispdir}/%{pkg}
+install -m 644 contrib/magit*.el{c,} %{buildroot}%{emacs_lispdir}/%{pkg}
 install -d %{buildroot}%{emacs_startdir}
 install -m 644 50magit.el %{buildroot}%{emacs_startdir}/init-%{pkg}.el
 install -d %{buildroot}%{_infodir}
 install -m 644 magit.info.gz %{buildroot}%{_infodir}
+install -d %{buildroot}%{_bindir}
+install -m 755 contrib/magit %{buildroot}%{_bindir}
 
 %post
 %install_info --info-dir=%{_infodir} %{_infodir}/magit.info.gz
@@ -76,6 +77,7 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %doc README magit.html
 %doc %{_infodir}/magit.info.gz
+%{_bindir}/magit
 %{emacs_startdir}/*.el
 %{emacs_lispdir}/%{pkg}/*.elc
 %{emacs_lispdir}/%{pkg}/*.el

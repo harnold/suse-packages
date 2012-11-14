@@ -20,12 +20,13 @@
 Name:             emacs
 Summary:          The GNU Emacs text editor
 Version:          24.2
-Release:          1
+Release:          2
 License:          GPL-3.0+
 Group:            Productivity/Editors/Emacs
 Url:              http://www.gnu.org/software/emacs/
 Source0:          http://ftp.gnu.org/pub/gnu/emacs/emacs-%{version}.tar.xz
 Source1:          site-start.el
+Source2:          run-emacs.sh
 BuildRoot:        %{_tmppath}/%{name}-%{version}-build
 BuildRequires:    texinfo
 BuildRequires:    xorg-x11-devel
@@ -51,7 +52,7 @@ Requires(preun):  info
 Provides:         emacs_program = %{version}-%{release}
 
 %description
-GNU Emacs is an extensible, customizable text editor—and more.
+GNU Emacs is an extensible and highly customizable text editor.
 
 %package el
 Summary:          Emacs Lisp sources
@@ -80,11 +81,19 @@ make %{?_smp_mflags}
 %make_install
 install -m 644 %{SOURCE1} %{buildroot}%{site_lisp_dir}
 install -d %{buildroot}%{site_start_dir}
+
+# Replace emacs binary by start script
+rm %{buildroot}%{_bindir}/emacs
+cp %{SOURCE2} run-emacs.sh
+sed -i "s/@version@/%{version}/" run-emacs.sh
+install -m 755 run-emacs.sh %{buildroot}%{_bindir}/emacs
+
+# Remove unused files
 rm %{buildroot}%{_infodir}/dir
 rm %{buildroot}%{_bindir}/ctags
-rm %{buildroot}%{_bindir}/emacs-%{version}
 
-rm -f emacs-files emacs-el-files
+# Generate file lists
+rm -f emacs-files emacs-el-files emacs-filelist emacs-el-filelist
 (
     build_dir=$(pwd)
     cd %{buildroot}
@@ -93,10 +102,9 @@ rm -f emacs-files emacs-el-files
         \( -type f -name "*.el.gz" -fprint "$build_dir"/emacs-el-filelist \) -o \
         \( -type f -fprint "$build_dir"/emacs-files \) -o \
         \( -type d -fprintf "$build_dir"/emacs-dirs "%%%%dir %%h/%%f\n" \)
-
 )
 cat emacs-dirs emacs-files > emacs-filelist
-sed -i -e "s|\.%{_prefix}|%{_prefix}|" emacs-filelist emacs-el-filelist
+sed -i "s|\.%{_prefix}|%{_prefix}|" emacs-filelist emacs-el-filelist
 
 %post
 for f in %{info_files}; do
@@ -130,6 +138,10 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 
 %changelog
+* Wed Nov 14 2012 holgerar@gmail.com - 24.2-2
+- Start Emacs from a shell script that sets the LC_NUMERIC environment
+  variable to "C" before running Emacs (bnc#779426)
+
 * Sat Sep 08 2012 holgerar@gmail.com - 24.2-1
 - New upstream release 24.2
 

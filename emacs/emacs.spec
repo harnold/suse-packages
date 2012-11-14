@@ -130,3 +130,20 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 
 %changelog
+* Sat Sep 08 2012 holgerar@gmail.com - 24.2-1
+- New upstream release 24.2
+
+* Mon Jun 11 2012 holgerar@gmail.com - 24.1-1
+- New upsteam release 24.1
+
+* Wed May 02 2012 holgerar@gmail.com - 24.0.96-1
+- New upstream prerelease 24.0.96
+
+* Sun Apr 15 2012 holgerar@gmail.com - 24.0.95
+- New upstream prerelease 24.0.95
+
+* Wed Feb 29 2012 holgerar@gmail.com - 24.0.94
+- New upstream prerelease 24.0.94
+
+* Wed Feb 08 2012 holgerar@gmail.com - 24.0.93
+- New upstream prerelease 24.0.93

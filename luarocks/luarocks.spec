@@ -17,14 +17,14 @@
 # ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.
 
-%global luaver 5.1
+%global luaver 5.2
 %global lua_libdir %{_libdir}/lua/%{luaver}
 %global lua_pkgdir %{_datadir}/lua/%{luaver}
 %global rocksdir %{_prefix}/local/lib/luarocks
 
 Name:             luarocks
 Summary:          Deployment and management system for Lua modules
-Version:          2.0.8
+Version:          2.0.12
 Release:          1
 License:          MIT
 Group:            Development/Languages/Other
@@ -34,7 +34,6 @@ BuildRoot:        %{_tmppath}/%{name}-%{version}-build
 BuildRequires:    lua >= %{luaver}
 BuildRequires:    lua-devel >= %{luaver}
 BuildRequires:    luadoc
-BuildRequires:    python-markdown
 Requires:         lua >= %{luaver}
 Requires:         wget
 
@@ -54,6 +53,7 @@ multiple local rocks trees.
 ./configure \
     --prefix=%{_prefix} \
     --sysconfdir=%{_sysconfdir}/luarocks \
+    --lua-version=%{luaver} \
     --lua-suffix=%{luaver} \
     --with-lua-include=%{_includedir} \
     --with-lua-lib=%{_libdir} \
@@ -61,7 +61,7 @@ multiple local rocks trees.
     --with-downloader=wget \
     --with-md5-checker=md5sum
 make
-markdown README.md > README.html
+mv README.md README
 
 %install
 %make_install
@@ -80,9 +80,13 @@ rm -rf %{buildroot}
 %config(noreplace) %{_sysconfdir}/luarocks
 %{_bindir}/*
 %{lua_pkgdir}/luarocks
-%doc COPYING README.html
+%doc COPYING README
 
 %changelog
+* Thu Nov 15 2012 holgerar@gmail.com - 2.0.12-1
+- Update to version 2.0.12: Experimental support for Lua 5.2
+- Drop build dependency on python-markdown
+
 * Wed Feb 29 2012 holgerar@gmail.com - 2.0.8-1
 - Update to version 2.0.8
 

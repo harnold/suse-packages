@@ -1,5 +1,4 @@
-# Copyright 2011, 2012 Holger Arnold.
-#
+# Copyright 2011, 2012 Holger Arnold.  #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
 #
@@ -23,14 +22,14 @@
 
 Name:             lua-filesystem
 Summary:          File system library for the Lua programming language
-Version:          1.5.0
-Release:          2
+Version:          1.6.2
+Release:          1
 License:          MIT
 Group:            Development/Libraries/Other
 Url:              http://www.keplerproject.org/luafilesystem/
 Source:           http://github.com/downloads/keplerproject/luafilesystem/luafilesystem-%{version}.tar.gz
 BuildRoot:        %{_tmppath}/%{name}-%{version}-build
-BuildRequires:    lua >= %{luaver}
+BuildRequires:    lua-devel >= %{luaver}
 Requires:         lua >= %{luaver}
 
 %description
@@ -63,5 +62,9 @@ rm -rf %{buildroot}
 %doc doc/us/*
 
 %changelog
+* Thu Nov 15 2012 holgerar@gmail.com - 1.6.2-1
+- Update to version 1.6.2: Full support for Lua 5.2
+- Add build dependency on lua-devel >= 5.1
+
 * Sat Feb 11 2012 holgerar@gmail.com - 1.5.0-1
 - Create package for version 1.5.0

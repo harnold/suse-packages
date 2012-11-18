@@ -1,5 +1,10 @@
-# Add C compiler flags supplied by the build environment through the
-# CFLAGS variable.
+From: Holger Arnold <holgerar@gmail.com>
+Date: 2012-02-11 21:00:00 2012 +0100
+Subject: Use compiler options specified in $CFLAGS
+Upstream: tbd
+
+We use the $CFLAGS environment variable to pass additional compiler
+options from the build system to the OCaml build.
 
 --- ocaml-3.12.0.old/configure	2010-07-28 15:18:22.000000000 +0200
 +++ ocaml-3.12.0.new/configure	2011-02-20 17:21:44.924119000 +0100

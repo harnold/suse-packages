@@ -18,7 +18,7 @@
 # DEALINGS IN THE SOFTWARE.
 
 %global ocamlver 4.00
-%global ocamlrel 0
+%global ocamlrel 1
 
 Name:             ocaml
 Summary:          The OCaml compiler and programming environment
@@ -27,7 +27,7 @@ Release:          1
 License:          QPL-1.0 with exceptions and LGPL-2.0 with exceptions
 Group:            Development/Languages/Other
 Url:              http://caml.inria.fr/ocaml
-Source0:          http://caml.inria.fr/pub/distrib/ocaml-%{ocamlver}/ocaml-%{version}.tar.gz
+Source0:          http://caml.inria.fr/pub/distrib/ocaml-%{ocamlver}/ocaml-%{version}.tar.bz2
 Source1:          http://caml.inria.fr/pub/distrib/ocaml-%{ocamlver}/ocaml-%{ocamlver}-refman-html.tar.gz
 Source2:          http://caml.inria.fr/pub/distrib/ocaml-%{ocamlver}/ocaml-%{ocamlver}-refman.info.tar.gz
 Patch0:           ocaml-cflags.patch
@@ -158,6 +158,10 @@ rm -rf %{buildroot}
 %doc otherlibs/labltk/examples_labltk
 
 %changelog
+* Thu Nov 15 2012 holgerar@gmail.com - 4.00.1-1
+- Update to version 4.00.1: Bugfix release
+- Move to SUSE's new patch format
+
 * Thu Sep 06 2012 holgerar@gmail.com - 4.00.0-1
 - Update to version 4.00.0:
   * Generalized algebraic data types (GADTs) added to the language

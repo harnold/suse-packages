@@ -27,7 +27,7 @@ License:          MIT
 Group:            Development/Languages/Other
 Url:              http://projects.camlcity.org/projects/findlib.html
 Source:           http://download.camlcity.org/download/%{pkg}-%{version}.tar.gz
-Patch1:           findlib-manpath.patch
+Patch0:           findlib-manpath.patch
 BuildRoot:        %{_tmppath}/%{name}-%{version}-build
 BuildRequires:    ocaml
 BuildRequires:    ocaml-camlp4
@@ -36,16 +36,16 @@ BuildRequires:    ncurses-devel
 Requires:         ocaml
 
 %description
-Findlib is a library manager for Objective Caml.  It defines a scheme for
-storing libraries and additional metadata such as a version string, the
-archive files comprising the library, compiler and linker options, and
-dependencies on other libraries.  Findlib includes a query tool to retrieve
-the stored information and frontends to the various OCaml compilers that
-simplify the usage of libraries.
+Findlib is a library manager for Objective Caml.  It defines a scheme
+for storing libraries and additional metadata such as a version string,
+the archive files comprising the library, compiler and linker options,
+and dependencies on other libraries.  Findlib includes a query tool to
+retrieve the stored information and frontends to the various OCaml
+compilers that simplify the usage of libraries.
 
 %prep
 %setup -n %{pkg}-%{version}
-%patch -P 1 -p1
+%patch -P 0 -p1
 
 %build
 ./configure -bindir %{_bindir} \
@@ -83,6 +83,9 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/*
 
 %changelog
+* Thu Nov 15 2012 holgerar@gmail.com - 1.3.3-1
+- Move to SUSE's new patch format
+
 * Thu Sep 06 2012 holgerar@gmail.com - 1.3.3-1
 - Update to version 1.3.3
 

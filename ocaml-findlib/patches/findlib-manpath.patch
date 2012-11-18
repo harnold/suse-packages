@@ -1,14 +1,48 @@
-# The configure script of findlib does not find ocaml's man pages,
-# which are located in /usr/share/man/*.
+From: Holger Arnold <holgerar@gmail.com>
+Date: 2012-11-15 16:07:04 +0100
+Subject: Set man path in configure script
+Upstream: tbd
 
---- findlib-1.2.6.old/configure	2010-08-17 20:50:28.000000000 +0200
-+++ findlib-1.2.6.new/configure	2011-02-20 17:02:10.902206012 +0100
-@@ -266,7 +266,7 @@
- # Find the directory for the manual:
+The configure script does not find the correct man path.
 
- # Fallback:
+--- findlib-1.3.3.old/configure	2012-07-09 11:29:16.000000000 +0200
++++ findlib-1.3.3.new/configure	2012-11-15 14:45:41.393446230 +0100
+@@ -263,36 +263,9 @@
+ 
+ test -n "$ocamlfind_bin" || ocamlfind_bin="$ocaml_core_bin"
+ 
+-# Find the directory for the manual:
++# Set the directory for the manual:
+ 
+-# Fallback:
 -ocaml_core_man=/usr/local/man
+-
+-d="$ocaml_core_bin"
+-while [ "$d" != '/' ]; do
+-    f=0
+-    if [ -d "$d/man/man1" ]; then
+-	if [ -f "$d/man/man1/ocamlc.1" -o \
+-	     -f "$d/man/man1/ocamlc.1.gz" -o \
+-	     -f "$d/man/man1/ocamlc.1.Z" ]; then
+-	     f=1
+-	fi
+-    else
+-	if [ -d "$d/man/mann" ]; then
+-	    if [ -f "$d/man/mann/ocamlc.n" -o \
+-		 -f "$d/man/mann/ocamlc.n.gz" -o \
+-		 -f "$d/man/mann/ocamlc.n.Z" ]; then
+-		f=1
+-	    fi
+-	fi
+-    fi
+-    if [ "$f" = "1" ]; then
+-	ocaml_core_man="$d/man"
+-	d="/"
+-    else
+-	d=`dirname "$d"`
+-    fi
+-done
 +ocaml_core_man=/usr/share/man
-
- d="$ocaml_core_bin"
- while [ "$d" != '/' ]; do
+ 
+ # Set the directory for ocamlfind's manuals:
+ 

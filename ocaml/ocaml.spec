@@ -158,3 +158,15 @@ rm -rf %{buildroot}
 %doc otherlibs/labltk/examples_labltk
 
 %changelog
+* Thu Sep 06 2012 holgerar@gmail.com - 4.00.0-1
+- Update to version 4.00.0:
+  * Generalized algebraic data types (GADTs) added to the language
+  * Improved packing and unpacking of first-class modules
+  * New compiler backend for ARM
+  * Support for randomized hash tables in the library
+  See http://caml.inria.fr/pub/distrib/ocaml-4.00/notes/Changes
+  for a detailed list of changes.
+- Drop ocaml-info-dir.patch: fixed upstream
+
+* Sat Feb 11 2012 holgerar@gmail.com - 3.12.1-2
+- Create package for version 3.12.1

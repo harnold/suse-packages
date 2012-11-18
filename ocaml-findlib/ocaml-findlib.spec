@@ -83,3 +83,15 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/*
 
 %changelog
+* Thu Sep 06 2012 holgerar@gmail.com - 1.3.3-1
+- Update to version 1.3.3
+
+* Tue May 08 2012 holgerar@gmail.com - 1.3.1-1
+- Update to version 1.3.1
+
+* Thu Mar 01 2012 holgerar@gmail.com - 1.2.8-1
+- Update to version 1.2.8
+- Drop findlib-ocamldoc.patch: fixed upstream
+
+* Sat Feb 11 2012 holgerar@gmail.com - 1.2.7-1
+- Create package for version 1.2.7

@@ -151,11 +151,11 @@ rm -rf %{buildroot}
 * Wed May 02 2012 holgerar@gmail.com - 24.0.96-1
 - New upstream prerelease 24.0.96
 
-* Sun Apr 15 2012 holgerar@gmail.com - 24.0.95
+* Sun Apr 15 2012 holgerar@gmail.com - 24.0.95-1
 - New upstream prerelease 24.0.95
 
-* Wed Feb 29 2012 holgerar@gmail.com - 24.0.94
+* Wed Feb 29 2012 holgerar@gmail.com - 24.0.94-1
 - New upstream prerelease 24.0.94
 
-* Wed Feb 08 2012 holgerar@gmail.com - 24.0.93
+* Wed Feb 08 2012 holgerar@gmail.com - 24.0.93-2
 - New upstream prerelease 24.0.93

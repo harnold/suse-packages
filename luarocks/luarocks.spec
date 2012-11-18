@@ -83,3 +83,8 @@ rm -rf %{buildroot}
 %doc COPYING README.html
 
 %changelog
+* Wed Feb 29 2012 holgerar@gmail.com - 2.0.8-1
+- Update to version 2.0.8
+
+* Sat Feb 11 2012 holgerar@gmail.com - 2.0.6-1
+- Create package for version 2.0.6

@@ -57,3 +57,5 @@ rm -rf %{buildroot}
 %doc doc/us/*
 
 %changelog
+* Sat Feb 11 2012 holgerar@gmail.com - 1.1.4-1
+- Create package for version 1.1.4

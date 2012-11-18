@@ -65,3 +65,11 @@ rm -rf %{buildroot}
 %config(noreplace) %{_sysconfdir}/bash_completion.d/*
 
 %changelog
+* Mon Mar 26 2012 holgerar@gmail.com - 2.0.0-1
+- Update to version 2.0.0
+
+* Thu Mar 01 2012 holgerar@gmail.com - 2.0.0.beta5-1
+- Update to version 2.0.0.beta5
+
+* Sat Feb 11 2012 holgerar@gmail.com - 2.0.0.beta4-1
+- Create package for version 2.0.0.beta4

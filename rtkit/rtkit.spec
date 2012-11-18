@@ -88,3 +88,15 @@ dbus-send --system --type=method_call --dest=org.freedesktop.DBus / org.freedesk
 %{_mandir}/man8/*
 
 %changelog
+* Tue Sep 18 2012 holgerar@gmail.com - 0.11-2
+- Use new RPM macros for systemd
+- Add build dependency on systemd
+
+* Sat Jun 09 2012 holgerar@gmail.com - 0.11-1
+- Update to version 0.11
+
+* Wed Mar 21 2012 holgerar@gmail.com - 0.10-3
+- Use source package provided by upstream
+
+* Sat Feb 11 2012 holgerar@gmail.com - 0.10-1
+- Create package for version 0.10

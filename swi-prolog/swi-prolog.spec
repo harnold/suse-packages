@@ -113,3 +113,5 @@ rm -rf %{buildroot}
 %doc install/xpce/*
 
 %changelog
+* Tue Mar 27 2012 holgerar@gmail.com - 6.0.2-1
+- Create package for version 6.0.2

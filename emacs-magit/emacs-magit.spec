@@ -83,3 +83,14 @@ rm -rf %{buildroot}
 %{emacs_lispdir}/%{pkg}/*.el
 
 %changelog
+* Mon Nov 12 2012 holgerar@gmail.com - 1.2.0-1
+- Update to version 1.2.0
+
+* Thu Sep 06 2012 holgerar@gmail.com - 1.1.1-2
+- Drop build dependency on python-markdown
+
+* Wed Feb 29 2012 holgerar@gmail.com - 1.1.1-1
+- Update to version 1.1.1
+
+* Thu Feb 09 2012 holgerar@gmail.com - 1.0.0-3
+- Create package for version 1.0.0

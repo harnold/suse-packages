@@ -70,3 +70,5 @@ rm -rf %{buildroot}
 %{emacs_lispdir}/%{pkg}/*.el
 
 %changelog
+* Sat Feb 11 2012 holgerar@gmail.com - 2.0.4-3
+- Create package for version 2.0.4

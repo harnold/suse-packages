@@ -19,19 +19,21 @@
 
 %global pkg     task
 
-Name:             taskwarrior
-Summary:          Command-line todo list manager
-Version:          2.0.0
-Release:          1
-License:          MIT
-Group:            Productivity/Other
-Url:              http://taskwarrior.org/
-Source0:          http://www.taskwarrior.org/download/%{pkg}-%{version}.tar.gz
-Source1:          http://www.taskwarrior.org/download/%{pkg}-%{version}.ref.pdf
-BuildRoot:        %{_tmppath}/%{name}-%{version}-build
-BuildRequires:    cmake
-BuildRequires:    lua-devel >= 5.1
-BuildRequires:    libuuid-devel
+Name:           taskwarrior
+Summary:        Command-line todo list manager
+Version:        2.1.2
+Release:        1
+License:        MIT
+Group:          Productivity/Other
+Url:            http://taskwarrior.org/
+Source0:        http://www.taskwarrior.org/download/%{pkg}-%{version}.tar.gz
+BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+BuildRequires:  cmake
+BuildRequires:  lua-devel >= 5.1
+BuildRequires:  libuuid-devel
+
+%global vim_sitedir     %{_datadir}/vim/site
+%global task_datadir    %{_datadir}/%{name}
 
 %description
 Taskwarrior maintains a list of tasks that you want to do, allowing
@@ -50,9 +52,31 @@ make %{?_smp_mflags}
 
 %install
 %make_install
+
+# Install data files
+install -d %{buildroot}/%{task_datadir}
+mv %{buildroot}%{_docdir}/%{name}/scripts/add-ons %{buildroot}%{task_datadir}
+mv %{buildroot}%{_docdir}/%{name}/scripts/extensions %{buildroot}%{task_datadir}
+mv %{buildroot}%{_docdir}/%{name}/i18n %{buildroot}%{task_datadir}
+mv %{buildroot}%{_docdir}/%{name}/rc %{buildroot}%{task_datadir}
+sed -i "s|\.\./\.\./scripts|%{task_datadir}|" %{buildroot}%{task_datadir}/rc/refresh
+
+# Bash completion
 install -d %{buildroot}%{_sysconfdir}/bash_completion.d
-install -m 644 -T scripts/bash/task_completion.sh %{buildroot}%{_sysconfdir}/bash_completion.d/task.sh
-install -m 644 %{SOURCE1} %{buildroot}%{_docdir}/%{name}
+mv %{buildroot}/%{_docdir}/%{name}/scripts/bash/task.sh %{buildroot}%{_sysconfdir}/bash_completion.d
+
+# Vim
+install -d %{buildroot}%{_datadir}/vim/site/{ftdetect,syntax}
+install -m 644 scripts/vim/ftdetect/*.vim %{buildroot}%{vim_sitedir}/ftdetect
+install -m 644 scripts/vim/syntax/*.vim %{buildroot}%{vim_sitedir}/syntax
+
+# Reference documentation
+install -d %{buildroot}%{_docdir}/%{name}
+install -m 644 doc/ref/task-ref.pdf %{buildroot}%{_docdir}/%{name}
+
+# Remove unused files
+rm -r %{buildroot}%{_docdir}/%{name}/scripts
+rm %{buildroot}%{_docdir}/%{name}/INSTALL
 
 %clean
 rm -rf %{buildroot}
@@ -60,11 +84,19 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 %{_bindir}/*
+%{_datadir}/%{name}
 %{_mandir}/*/*
 %{_docdir}/%{name}
-%config(noreplace) %{_sysconfdir}/bash_completion.d/*
+%{_sysconfdir}/bash_completion.d/*
+%{vim_sitedir}/*/*
 
 %changelog
+* Mon Nov 19 2012 holgerar@gmail.com - 2.1.2-1
+- Update to version 2.1.2
+- Install Vim support files
+- Install add-ons, extensions, color themes, and holiday data in
+  /usr/share/taskwarrior
+
 * Mon Mar 26 2012 holgerar@gmail.com - 2.0.0-1
 - Update to version 2.0.0
 

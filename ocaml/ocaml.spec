@@ -23,7 +23,7 @@
 Name:             ocaml
 Summary:          The OCaml compiler and programming environment
 Version:          %{ocamlver}.%{ocamlrel}
-Release:          1
+Release:          2
 License:          QPL-1.0 with exceptions and LGPL-2.0 with exceptions
 Group:            Development/Languages/Other
 Url:              http://caml.inria.fr/ocaml
@@ -125,6 +125,7 @@ rm -rf %{buildroot}
 %doc README LICENSE Changes
 %{_bindir}/*
 %{_libdir}/ocaml
+%doc %{_mandir}/man1/*
 %exclude %{_bindir}/camlp4*
 %exclude %{_bindir}/mkcamlp4
 %exclude %{_bindir}/labltk
@@ -132,13 +133,13 @@ rm -rf %{buildroot}
 %exclude %{_libdir}/ocaml/camlp4
 %exclude %{_libdir}/ocaml/labltk
 %exclude %{_libdir}/ocaml/stublibs/dlllabltk.so
+%exclude %{_mandir}/man1/camlp4*
 
 %files doc
 %defattr(-,root,root)
-%doc %{_mandir}/*/*
+%doc %{_mandir}/man3/*
 %doc %{_infodir}/*
 %doc htmlman
-%exclude %{_mandir}/man1/camlp4*
 
 %files camlp4
 %defattr(-,root,root)
@@ -158,6 +159,9 @@ rm -rf %{buildroot}
 %doc otherlibs/labltk/examples_labltk
 
 %changelog
+* Wed Nov 21 2012 holgerar@gmail.com - 4.00.1-2
+- Include man pages for OCaml binaries in main package
+
 * Thu Nov 15 2012 holgerar@gmail.com - 4.00.1-1
 - Update to version 4.00.1: Bugfix release
 - Move to SUSE's new patch format

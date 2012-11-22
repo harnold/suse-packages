@@ -44,6 +44,7 @@ It uses lesson "scripts" and can be easily extended.
 
 %build
 %configure
+make %{?_smp_mflags}
 
 %install
 %make_install

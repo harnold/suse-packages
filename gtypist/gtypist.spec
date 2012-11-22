@@ -55,6 +55,10 @@ gzip -9 %{buildroot}%{_infodir}/*.info
 install -d %{buildroot}%{emacs_startdir}
 install -m 644 %{SOURCE1} %{buildroot}%{emacs_startdir}
 
+install -d %{buildroot}%{_datadir}/%{name}/tools
+install -m 644 tools/gtypist.pm %{buildroot}%{_datadir}/%{name}/tools
+install -m 755 tools/{findwords,ktouch2typ.pl,tt2typ.pl,typcombine,typv1tov2} %{buildroot}%{_datadir}/%{name}/tools
+
 %post
 %install_info --info-dir=%{_infodir} %{_infodir}/gtypist.info.gz
 

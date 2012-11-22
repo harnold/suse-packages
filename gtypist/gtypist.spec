@@ -25,10 +25,14 @@ License:            GPL-3.0
 Group:              Amusements/Teaching/Other
 Url:                http://www.gnu.org/software/gtypist/
 Source0:            http://ftp.gnu.org/gnu/gtypist/%{name}-%{version}.tar.xz
+Source1:            init-gtypist.el
 BuildRoot:          %{_tmppath}/%{name}-%{version}-build
 BuildRequires:      ncurses-devel
 Requires(post):     info
 Requires(preun):    info
+
+%global emacs_sitedir   %{_datadir}/emacs/site-lisp
+%global emacs_startdir  %{_datadir}/emacs/site-lisp/site-start.d
 
 %description
 GNU Typist is a text mode typing tutor.  You can learn correct typing with
@@ -44,9 +48,11 @@ It uses lesson "scripts" and can be easily extended.
 %install
 %make_install
 
-# Prepare info files
 rm %{buildroot}%{_infodir}/dir
 gzip -9 %{buildroot}%{_infodir}/*.info
+
+install -d %{buildroot}%{emacs_startdir}
+install -m 644 %{SOURCE1} %{buildroot}%{emacs_startdir}
 
 %post
 %install_info --info-dir=%{_infodir} %{_infodir}/gtypist.info.gz
@@ -62,7 +68,8 @@ rm -rf %{buildroot}
 %{_bindir}/*
 %{_datadir}/%{name}
 %{_datadir}/locale/*/*/gtypist.mo
-%{_datadir}/emacs/site-lisp/*
+%{emacs_sitedir}/*
+%{emacs_startdir}/*
 %doc %{_infodir}/gtypist*
 %doc %{_mandir}/*/*
 %doc ChangeLog COPYING NEWS QUESTIONS README THANKS TODO

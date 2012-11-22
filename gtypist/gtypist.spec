@@ -20,7 +20,7 @@
 Name:               gtypist
 Summary:            Universal typing tutor
 Version:            2.9
-Release:            1
+Release:            2
 License:            GPL-3.0
 Group:              Amusements/Teaching/Other
 Url:                http://www.gnu.org/software/gtypist/
@@ -80,5 +80,10 @@ rm -rf %{buildroot}
 %doc ChangeLog COPYING NEWS QUESTIONS README THANKS TODO
 
 %changelog
+* Thu Nov 22 2012 holgerar@gmail.com - 2.9-2
+- Install additional tools for creating and converting Typist files.
+- Auto-load gtypist-mode when editing Typist files in Emacs.
+- Enable parallel build.
+
 * Wed Nov 21 2012 holgerar@gmail.com - 2.9-1
 - Create package for version 2.9

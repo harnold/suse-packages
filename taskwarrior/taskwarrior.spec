@@ -19,18 +19,18 @@
 
 %global pkg     task
 
-Name:           taskwarrior
-Summary:        Command-line todo list manager
-Version:        2.1.2
-Release:        1
-License:        MIT
-Group:          Productivity/Other
-Url:            http://taskwarrior.org/
-Source0:        http://www.taskwarrior.org/download/%{pkg}-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-build
-BuildRequires:  cmake
-BuildRequires:  lua-devel >= 5.1
-BuildRequires:  libuuid-devel
+Name:             taskwarrior
+Summary:          Command-line todo list manager
+Version:          2.1.2
+Release:          1
+License:          MIT
+Group:            Productivity/Other
+Url:              http://taskwarrior.org/
+Source0:          http://www.taskwarrior.org/download/%{pkg}-%{version}.tar.gz
+BuildRoot:        %{_tmppath}/%{name}-%{version}-build
+BuildRequires:    cmake
+BuildRequires:    lua-devel >= 5.1
+BuildRequires:    libuuid-devel
 
 %global vim_sitedir     %{_datadir}/vim/site
 %global task_datadir    %{_datadir}/%{name}

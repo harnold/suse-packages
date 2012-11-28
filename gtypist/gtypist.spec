@@ -17,19 +17,19 @@
 # ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.
 
-Name:               gtypist
-Summary:            Universal typing tutor
-Version:            2.9
-Release:            2
-License:            GPL-3.0
-Group:              Amusements/Teaching/Other
-Url:                http://www.gnu.org/software/gtypist/
-Source0:            http://ftp.gnu.org/gnu/gtypist/%{name}-%{version}.tar.xz
-Source1:            init-gtypist.el
-BuildRoot:          %{_tmppath}/%{name}-%{version}-build
-BuildRequires:      ncurses-devel
-Requires(post):     info
-Requires(preun):    info
+Name:             gtypist
+Summary:          Universal typing tutor
+Version:          2.9
+Release:          2
+License:          GPL-3.0
+Group:            Amusements/Teaching/Other
+Url:              http://www.gnu.org/software/gtypist/
+Source0:          http://ftp.gnu.org/gnu/gtypist/%{name}-%{version}.tar.xz
+Source1:          init-gtypist.el
+BuildRoot:        %{_tmppath}/%{name}-%{version}-build
+BuildRequires:    ncurses-devel
+Requires(post):   info
+Requires(preun):  info
 
 %global emacs_sitedir   %{_datadir}/emacs/site-lisp
 %global emacs_startdir  %{_datadir}/emacs/site-lisp/site-start.d

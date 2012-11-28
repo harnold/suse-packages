@@ -21,7 +21,7 @@
 
 Name:             swi-prolog
 Summary:          Powerful Prolog environment
-Version:          6.0.2
+Version:          6.2.3
 Release:          1
 License:          LGPL-2.1
 Group:            Development/Languages/Other
@@ -41,7 +41,7 @@ BuildRequires:    xorg-x11-devel
 BuildRequires:    libjpeg62-devel
 Requires:         pkg-config
 Obsoletes:        swipl < %{version}
-Provides:         swipl
+Provides:         swipl = %{version}
 
 %description
 SWI-Prolog is a powerful Prolog environment.
@@ -58,8 +58,8 @@ This package contains the SWI-Prolog Reference Manual and documentation
 for the libraries that are part of SWI-Prolog.
 
 %package xpce
-Summary:          Toolkit for developing graphical user interfaces in SWI-Prolog
-Requires:         swi-prolog = %{version}-%{release}
+Summary:        Toolkit for developing graphical user interfaces in SWI-Prolog
+Requires:       swi-prolog = %{version}-%{release}
 
 %description xpce
 XPCE is an object-oriented toolkit for developing platform-independent
@@ -70,18 +70,31 @@ dynamically typed languages.
 %setup -q -n %{pkg}-%{version}
 
 %build
-./configure --prefix=%{_prefix} --with-world
+./configure \
+    --prefix=%{_prefix} \
+    --disable-libdirversion \
+    --with-world
 make %{?_smp_mflags}
 
 %install
 %make_install
+
+# Include files
+install -d %{buildroot}%{_includedir}/swipl
+mv %{buildroot}%{_libdir}/swipl/include/* %{buildroot}%{_includedir}/swipl
+
+# Java files
 install -d %{buildroot}%{_javadir}
-rm %{buildroot}%{_libdir}/swipl-%{version}/Makefile
-ln -s %{_libdir}/swipl-%{version}/lib/jpl.jar %{buildroot}%{_javadir}
+rm %{buildroot}%{_libdir}/swipl/Makefile
+ln -s %{_libdir}/swipl/lib/jpl.jar %{buildroot}%{_javadir}
+
+# Reference manual and package documentation
 mkdir install
-mv -f %{buildroot}%{_libdir}/swipl-%{version}/doc install
+mv -f %{buildroot}%{_libdir}/swipl/doc install
+
+# Documentation for XPCE
 mkdir install/xpce
-mv -f %{buildroot}%{_libdir}/swipl-%{version}/xpce/{COPYING,README} install/xpce
+mv -f %{buildroot}%{_libdir}/swipl/xpce/{COPYING,README} install/xpce
 
 %clean
 rm -rf %{buildroot}
@@ -90,14 +103,15 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %{_bindir}/*
 %{_libdir}/pkgconfig/*
-%{_libdir}/swipl-%{version}
+%{_libdir}/swipl
+%{_includedir}/swipl
 %{_javadir}/*
 %doc COPYING README
 %doc %{_mandir}/*/*
 %exclude %{_bindir}/xpce-client
-%exclude %{_libdir}/swipl-%{version}/customize/dotxpcerc
-%exclude %{_libdir}/swipl-%{version}/lib/*/pl2xpce.so
-%exclude %{_libdir}/swipl-%{version}/xpce
+%exclude %{_libdir}/swipl/customize/dotxpcerc
+%exclude %{_libdir}/swipl/lib/*/pl2xpce.so
+%exclude %{_libdir}/swipl/xpce
 
 %files doc
 %defattr(-,root,root)
@@ -107,11 +121,20 @@ rm -rf %{buildroot}
 %files xpce
 %defattr(-,root,root)
 %{_bindir}/xpce-client
-%{_libdir}/swipl-%{version}/customize/dotxpcerc
-%{_libdir}/swipl-%{version}/lib/*/pl2xpce.so
-%{_libdir}/swipl-%{version}/xpce
+%{_libdir}/swipl/customize/dotxpcerc
+%{_libdir}/swipl/lib/*/pl2xpce.so
+%{_libdir}/swipl/xpce
 %doc install/xpce/*
 
 %changelog
+* Wed Nov 28 2012 holgerar@gmail.com - 6.2.3-1
+- Update to version 6.2.3:
+  * Initial version of the 'pack' package manager.
+  * Better source file handling, notably wrt. ':- include(File)'.
+  * Many fixes to the debugger, improving source handling
+    and the logic that decides on which ports are hidden.
+- Drop version number from library path.
+- Move header files to /usr/include/swipl.
+
 * Tue Mar 27 2012 holgerar@gmail.com - 6.0.2-1
-- Create package for version 6.0.2
+- Create package for version 6.0.2.

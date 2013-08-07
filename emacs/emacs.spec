@@ -1,4 +1,4 @@
-# Copyright 2011, 2012 Holger Arnold.
+# Copyright 2011, 2012, 2013 Holger Arnold.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -19,8 +19,8 @@
 
 Name:             emacs
 Summary:          The GNU Emacs text editor
-Version:          24.2
-Release:          2
+Version:          24.3
+Release:          1
 License:          GPL-3.0+
 Group:            Productivity/Editors/Emacs
 Url:              http://www.gnu.org/software/emacs/
@@ -28,25 +28,27 @@ Source0:          http://ftp.gnu.org/pub/gnu/emacs/emacs-%{version}.tar.xz
 Source1:          site-start.el
 Source2:          run-emacs.sh
 BuildRoot:        %{_tmppath}/%{name}-%{version}-build
-BuildRequires:    texinfo
-BuildRequires:    xorg-x11-devel
-BuildRequires:    gtk3-devel
+BuildRequires:    alsa-devel
+BuildRequires:    dbus-1-devel
 BuildRequires:    freetype2-devel
 BuildRequires:    gconf2-devel
-BuildRequires:    dbus-1-devel
-BuildRequires:    libxml2-devel
-BuildRequires:    libpng14-devel
-BuildRequires:    libjpeg62-devel
-BuildRequires:    libtiff-devel
 BuildRequires:    giflib-devel
-BuildRequires:    librsvg-devel
-BuildRequires:    ImageMagick-devel
-BuildRequires:    zlib-devel
-BuildRequires:    m17n-lib-devel
-BuildRequires:    libotf-devel
-BuildRequires:    libgnutls-devel
 BuildRequires:    gpm-devel
-BuildRequires:    alsa-devel
+BuildRequires:    gtk3-devel
+BuildRequires:    ImageMagick-devel
+BuildRequires:    krb5-devel
+BuildRequires:    libgnutls-devel
+BuildRequires:    libgnutls-openssl-devel
+BuildRequires:    libjpeg8-devel
+BuildRequires:    libotf-devel
+BuildRequires:    libpng15-devel
+BuildRequires:    librsvg-devel
+BuildRequires:    libtiff-devel
+BuildRequires:    libxml2-devel
+BuildRequires:    m17n-lib-devel
+BuildRequires:    makeinfo
+BuildRequires:    xorg-x11-devel
+BuildRequires:    zlib-devel
 Requires(post):   info
 Requires(preun):  info
 Provides:         emacs_program = %{version}-%{release}
@@ -63,7 +65,7 @@ Requires:         emacs = %{version}-%{release}
 This package contains the Lisp source files of Emacs.  You do not need
 these files to run Emacs.
 
-%global info_files ada-mode auth autotype calc ccmode cl dbus dired-x ebrowse ede ediff edt efaq eieio eintr elisp emacs emacs-mime epa erc ert eshell eudc flymake forms gnus idlwave info mairix-el message mh-e newsticker nxml-mode org pcl-cvs pgg rcirc reftex remember sasl sc semantic ses sieve smtpmail speedbar tramp url viper vip widget woman
+%global info_files ada-mode auth autotype bovine calc ccmode cl dbus dired-x ebrowse ede ediff edt efaq eieio eintr elisp emacs-gnutls emacs emacs-mime epa erc ert eshell eudc flymake forms gnus htmlfontify idlwave info mairix-el message mh-e newsticker nxml-mode org pcl-cvs pgg rcirc reftex remember sasl sc semantic ses sieve smtpmail speedbar srecode tramp url viper vip widget wisent woman
 
 %global site_lisp_dir  %{_datadir}/emacs/site-lisp
 %global site_start_dir %{site_lisp_dir}/site-start.d
@@ -81,6 +83,7 @@ make %{?_smp_mflags}
 %make_install
 install -m 644 %{SOURCE1} %{buildroot}%{site_lisp_dir}
 install -d %{buildroot}%{site_start_dir}
+install -d %{buildroot}%{_docdir}
 
 # Replace emacs binary by start script
 rm %{buildroot}%{_bindir}/emacs
@@ -126,7 +129,7 @@ rm -rf %{buildroot}
 %files -f emacs-filelist
 %defattr(-,root,root)
 %{_bindir}/*
-%{_libdir}/emacs
+%{_libexecdir}/emacs
 %{_datadir}/applications/*
 %{_datadir}/icons/hicolor/*/*/*
 %{_localstatedir}/games/emacs
@@ -138,6 +141,12 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 
 %changelog
+* Wed Aug 07 2013 holgerar@gmail.com - 24.3-1
+- New upstream release 24.3:
+  + Emacs contains a new major mode for Python.
+  + The Common Lisp emulation library has been updated.
+  + Generalized variables are now in core Emacs Lisp.
+
 * Wed Nov 14 2012 holgerar@gmail.com - 24.2-2
 - Start Emacs from a shell script that sets the LC_NUMERIC environment
   variable to "C" before running Emacs (bnc#779426)

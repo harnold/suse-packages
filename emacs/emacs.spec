@@ -20,7 +20,7 @@
 Name:             emacs
 Summary:          The GNU Emacs text editor
 Version:          24.3
-Release:          1
+Release:          2
 License:          GPL-3.0+
 Group:            Productivity/Editors/Emacs
 Url:              http://www.gnu.org/software/emacs/
@@ -111,14 +111,14 @@ sed -i "s|\.%{_prefix}|%{_prefix}|" emacs-filelist emacs-el-filelist
 
 %post
 for f in %{info_files}; do
-    %install_info --info-dir=%{_infodir} %{_infodir}/$f.gz
+    %install_info --info-dir=%{_infodir} %{_infodir}/$f.info.gz
 done
 %desktop_database_post
 %icon_theme_cache_post
 
 %postun
 for f in %{info_files}; do
-    %install_info_delete --info-dir=%{_infodir} %{_infodir}/$f.gz
+    %install_info_delete --info-dir=%{_infodir} %{_infodir}/$f.info.gz
 done
 %desktop_database_postun
 %icon_theme_cache_postun
@@ -141,6 +141,10 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 
 %changelog
+* Sat Aug 10 2013 holgerar@gmail.com - 24.3-2
+- Fix a packaging bug that made the Emacs info files inaccessible from
+  the info directory in the previous release.
+
 * Wed Aug 07 2013 holgerar@gmail.com - 24.3-1
 - New upstream release 24.3:
   + Emacs contains a new major mode for Python.

@@ -1,4 +1,4 @@
-# Copyright 2012 Holger Arnold.
+# Copyright 2012, 2013 Holger Arnold.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -21,7 +21,7 @@
 
 Name:             swi-prolog
 Summary:          Powerful Prolog environment
-Version:          6.2.3
+Version:          6.4.1
 Release:          1
 License:          LGPL-2.1
 Group:            Development/Languages/Other
@@ -38,7 +38,7 @@ BuildRequires:    zlib-devel
 BuildRequires:    java-devel >= 1.6.0
 BuildRequires:    jpackage-utils
 BuildRequires:    xorg-x11-devel
-BuildRequires:    libjpeg62-devel
+BuildRequires:    libjpeg8-devel
 Requires:         pkg-config
 Obsoletes:        swipl < %{version}
 Provides:         swipl = %{version}
@@ -85,7 +85,6 @@ mv %{buildroot}%{_libdir}/swipl/include/* %{buildroot}%{_includedir}/swipl
 
 # Java files
 install -d %{buildroot}%{_javadir}
-rm %{buildroot}%{_libdir}/swipl/Makefile
 ln -s %{_libdir}/swipl/lib/jpl.jar %{buildroot}%{_javadir}
 
 # Reference manual and package documentation
@@ -95,6 +94,9 @@ mv -f %{buildroot}%{_libdir}/swipl/doc install
 # Documentation for XPCE
 mkdir install/xpce
 mv -f %{buildroot}%{_libdir}/swipl/xpce/{COPYING,README} install/xpce
+
+# Delete unnecessary files
+rm %{buildroot}%{_libdir}/swipl/Makefile
 
 %clean
 rm -rf %{buildroot}
@@ -127,6 +129,16 @@ rm -rf %{buildroot}
 %doc install/xpce/*
 
 %changelog
+* Mon Aug 12 2013 holgerar@gmail.com - 6.4.1-1
+- Update to version 6.4.1:
+  * RDF library updated to version 3.  Includes fast parsers for
+    ntriples, Turtle, and TriG formats.
+  * Quasi-quotation added to the language.
+  * PlDoc now accepts common Markdown constructs.
+  * Many enhancements to the development tools and libraries.
+  * Increased stability.
+- Use libjpeg8.
+
 * Wed Nov 28 2012 holgerar@gmail.com - 6.2.3-1
 - Update to version 6.2.3:
   * Initial version of the 'pack' package manager.

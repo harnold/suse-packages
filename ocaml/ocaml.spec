@@ -23,7 +23,7 @@
 Name:             ocaml
 Summary:          The OCaml compiler and programming environment
 Version:          %{ocamlver}.%{ocamlrel}
-Release:          3
+Release:          4
 License:          QPL-1.0 with exceptions and LGPL-2.0 with exceptions
 Group:            Development/Languages/Other
 Url:              http://caml.inria.fr/ocaml
@@ -34,7 +34,6 @@ Patch0:           ocaml-cflags.patch
 BuildRoot:        %{_tmppath}/%{name}-%{version}-build
 BuildRequires:    binutils-devel
 BuildRequires:    ncurses-devel
-BuildRequires:    gdbm-devel
 BuildRequires:    xorg-x11-devel
 BuildRequires:    tcl-devel
 BuildRequires:    tk-devel
@@ -158,7 +157,11 @@ rm -rf %{buildroot}
 %doc otherlibs/labltk/examples_labltk
 
 %changelog
-* Tue Aug 14 2013 holgerar@gmail.com - 4.00.1-3
+* Tue Aug 13 2013 holgerar@gmail.com - 4.00.1-4
+- Remove build dependency on gdbm-devel because the dbm library is no
+  longer part of OCaml.
+
+* Tue Aug 13 2013 holgerar@gmail.com - 4.00.1-3
 - Remove build dependency on texinfo.
 
 * Wed Nov 21 2012 holgerar@gmail.com - 4.00.1-2

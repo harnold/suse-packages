@@ -1,4 +1,4 @@
-# Copyright 2009-2012 Holger Arnold.
+# Copyright 2009-2013 Holger Arnold.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -21,7 +21,7 @@
 
 Name:             ocaml-%{pkg}
 Summary:          Library manager for Objective Caml
-Version:          1.3.3
+Version:          1.4
 Release:          1
 License:          MIT
 Group:            Development/Languages/Other
@@ -83,18 +83,28 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/*
 
 %changelog
+* Tue Aug 13 2013 holgerar@gmail.com - 1.4-1
+- Update to version 1.4:
+  * Improved performance when many arguments need to be processed.
+  * ocamldoc.opt is configured automatically.
+  * New config switch -no-custom to prevent that ocamlfind is linked
+    in custom-runtime mode (bytecode only).
+  * Support for ocamloptp.
+  * New function Topfind.log for controlling the verbosity.
+  * Rewritten Fl_metascanner without camlp4.
+
 * Thu Nov 15 2012 holgerar@gmail.com - 1.3.3-1
-- Move to SUSE's new patch format
+- Move to SUSE's new patch format.
 
 * Thu Sep 06 2012 holgerar@gmail.com - 1.3.3-1
-- Update to version 1.3.3
+- Update to version 1.3.3.
 
 * Tue May 08 2012 holgerar@gmail.com - 1.3.1-1
-- Update to version 1.3.1
+- Update to version 1.3.1.
 
 * Thu Mar 01 2012 holgerar@gmail.com - 1.2.8-1
-- Update to version 1.2.8
-- Drop findlib-ocamldoc.patch: fixed upstream
+- Update to version 1.2.8.
+- Drop findlib-ocamldoc.patch: fixed upstream.
 
 * Sat Feb 11 2012 holgerar@gmail.com - 1.2.7-1
-- Create package for version 1.2.7
+- Create package for version 1.2.7.

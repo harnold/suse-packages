@@ -1,4 +1,4 @@
-# Copyright 2009-2012 Holger Arnold.
+# Copyright 2009-2013 Holger Arnold.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -23,7 +23,7 @@
 Name:             ocaml
 Summary:          The OCaml compiler and programming environment
 Version:          %{ocamlver}.%{ocamlrel}
-Release:          2
+Release:          3
 License:          QPL-1.0 with exceptions and LGPL-2.0 with exceptions
 Group:            Development/Languages/Other
 Url:              http://caml.inria.fr/ocaml
@@ -38,7 +38,6 @@ BuildRequires:    gdbm-devel
 BuildRequires:    xorg-x11-devel
 BuildRequires:    tcl-devel
 BuildRequires:    tk-devel
-BuildRequires:    texinfo
 Provides:         ocaml(compiler) = %{version}
 Provides:         ocaml(runtime) = %{version}
 
@@ -159,22 +158,25 @@ rm -rf %{buildroot}
 %doc otherlibs/labltk/examples_labltk
 
 %changelog
+* Tue Aug 14 2013 holgerar@gmail.com - 4.00.1-3
+- Remove build dependency on texinfo.
+
 * Wed Nov 21 2012 holgerar@gmail.com - 4.00.1-2
-- Include man pages for OCaml binaries in main package
+- Include man pages for OCaml binaries in main package.
 
 * Thu Nov 15 2012 holgerar@gmail.com - 4.00.1-1
-- Update to version 4.00.1: Bugfix release
-- Move to SUSE's new patch format
+- Update to version 4.00.1: Bugfix release.
+- Move to SUSE's new patch format.
 
 * Thu Sep 06 2012 holgerar@gmail.com - 4.00.0-1
 - Update to version 4.00.0:
-  * Generalized algebraic data types (GADTs) added to the language
-  * Improved packing and unpacking of first-class modules
-  * New compiler backend for ARM
-  * Support for randomized hash tables in the library
+  * Generalized algebraic data types (GADTs) added to the language.
+  * Improved packing and unpacking of first-class modules.
+  * New compiler backend for ARM.
+  * Support for randomized hash tables in the library.
   See http://caml.inria.fr/pub/distrib/ocaml-4.00/notes/Changes
   for a detailed list of changes.
-- Drop ocaml-info-dir.patch: fixed upstream
+- Drop ocaml-info-dir.patch: fixed upstream.
 
 * Sat Feb 11 2012 holgerar@gmail.com - 3.12.1-2
-- Create package for version 3.12.1
+- Create package for version 3.12.1.

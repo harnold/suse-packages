@@ -1,4 +1,4 @@
-# Copyright 2011, 2012 Holger Arnold.
+# Copyright 2011, 2012, 2013 Holger Arnold.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -17,20 +17,19 @@
 # ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.
 
-%global pkg     task
+%global pkg task
 
-Name:             taskwarrior
-Summary:          Command-line todo list manager
-Version:          2.1.2
-Release:          1
-License:          MIT
-Group:            Productivity/Other
-Url:              http://taskwarrior.org/
-Source0:          http://www.taskwarrior.org/download/%{pkg}-%{version}.tar.gz
-BuildRoot:        %{_tmppath}/%{name}-%{version}-build
-BuildRequires:    cmake
-BuildRequires:    lua-devel >= 5.1
-BuildRequires:    libuuid-devel
+Name:           taskwarrior
+Summary:        Command-line todo list manager
+Version:        2.2.0
+Release:        1
+License:        MIT
+Group:          Productivity/Other
+Url:            http://taskwarrior.org/
+Source0:        http://www.taskwarrior.org/download/%{pkg}-%{version}.tar.gz
+BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+BuildRequires:  cmake
+BuildRequires:  libuuid-devel
 
 %global vim_sitedir     %{_datadir}/vim/site
 %global task_datadir    %{_datadir}/%{name}
@@ -39,8 +38,8 @@ BuildRequires:    libuuid-devel
 Taskwarrior maintains a list of tasks that you want to do, allowing
 you to add, remove, and otherwise manipulate them.  Taskwarrior has
 a rich list of subcommands that allow you to do sophisticated things
-with it.  It has customizable reports, charts, GTD features, Lua
-extensions, device synching and more.
+with it.  It has customizable reports, charts, GTD features, device
+synching and more.
 
 %prep
 %setup -q -n %{pkg}-%{version}
@@ -56,7 +55,6 @@ make %{?_smp_mflags}
 # Install data files
 install -d %{buildroot}/%{task_datadir}
 mv %{buildroot}%{_docdir}/%{name}/scripts/add-ons %{buildroot}%{task_datadir}
-mv %{buildroot}%{_docdir}/%{name}/scripts/extensions %{buildroot}%{task_datadir}
 mv %{buildroot}%{_docdir}/%{name}/i18n %{buildroot}%{task_datadir}
 mv %{buildroot}%{_docdir}/%{name}/rc %{buildroot}%{task_datadir}
 sed -i "s|\.\./\.\./scripts|%{task_datadir}|" %{buildroot}%{task_datadir}/rc/refresh
@@ -91,6 +89,16 @@ rm -rf %{buildroot}
 %{vim_sitedir}/*/*
 
 %changelog
+* Wed Aug 21 2013 holgerar@gmail.com - 2.2.0-1
+- Update to version 2.2.0:
+  * Task states such as BLOCKED, OVERDUE, WAITING, etc. can be queried
+    using virtual tags.  See 'man task' for details.
+  * New 'modified' task attribute.
+  * Improved Bash auto-completion.
+  * Improved statistics report.
+  * Support for Lua extensions removed.
+  * Many bugs fixed.
+
 * Mon Nov 19 2012 holgerar@gmail.com - 2.1.2-1
 - Update to version 2.1.2
 - Install Vim support files

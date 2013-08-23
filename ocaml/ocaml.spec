@@ -20,6 +20,9 @@
 %global __ocaml_requires_opts -c -f "%{buildroot}%{_bindir}/ocamlrun %{buildroot}%{_bindir}/ocamlobjinfo"
 %global __ocaml_provides_opts -f "%{buildroot}%{_bindir}/ocamlrun %{buildroot}%{_bindir}/ocamlobjinfo"
 
+%global emacs_lispdir  %{_datadir}/emacs/site-lisp
+%global emacs_startdir %{_datadir}/emacs/site-lisp/site-start.d
+
 %global ocamlver 4.00
 %global ocamlrel 1
 
@@ -36,6 +39,7 @@ Provides: ocaml(runtime) = %{version}
 Source0: http://caml.inria.fr/pub/distrib/ocaml-%{ocamlver}/ocaml-%{version}.tar.bz2
 Source1: http://caml.inria.fr/pub/distrib/ocaml-%{ocamlver}/ocaml-%{ocamlver}-refman-html.tar.gz
 Source2: http://caml.inria.fr/pub/distrib/ocaml-%{ocamlver}/ocaml-%{ocamlver}-refman.info.tar.gz
+Source3: 50-caml-mode.el
 Patch0: ocaml-cflags.patch
 
 BuildRequires: binutils-devel
@@ -43,6 +47,7 @@ BuildRequires: ncurses-devel
 BuildRequires: xorg-x11-devel
 BuildRequires: tcl-devel
 BuildRequires: tk-devel
+BuildRequires: emacs
 
 %description
 OCaml is a strongly typed functional programming language featuring
@@ -87,6 +92,16 @@ Requires: tk-devel
 The labltk library provides an OCaml interface to the Tcl/Tk GUI
 library.
 
+%package emacs
+Summary: OCaml support for Emacs
+Requires: emacs
+BuildArch: noarch
+
+%description emacs
+This package adds OCaml support to Emacs.  It provides Emacs modes for
+editing OCaml files and for running an OCaml top-level inside Emacs.
+The included ocamltags script can be used for generating OCaml tag files.
+
 %prep
 %setup -q -T -b 0
 %setup -q -T -D -a 1
@@ -101,6 +116,11 @@ CFLAGS="%{optflags}" ./configure \
     -mandir %{_mandir}
 make world.opt
 
+( cd emacs
+  rm caml-xemacs.el
+  emacs --no-init-file --no-site-file --batch -L . -f batch-byte-compile *.el
+  make ocamltags )
+
 %install
 make install \
     BINDIR="%{buildroot}%{_bindir}" \
@@ -109,6 +129,12 @@ make install \
 install -m 644 camlp4/man/camlp4.1.tpl %{buildroot}%{_mandir}/man1/camlp4.1
 install -d %{buildroot}%{_infodir}
 install -m 644 infoman/ocaml.info*.gz %{buildroot}%{_infodir}
+
+install -d %{buildroot}%{emacs_lispdir}/caml-mode
+install -m 644 emacs/*.el emacs/*.elc %{buildroot}%{emacs_lispdir}/caml-mode
+install -d %{buildroot}%{emacs_startdir}
+install -m 644 %{SOURCE3} %{buildroot}%{emacs_startdir}
+install -m 755 emacs/ocamltags %{buildroot}%{_bindir}
 
 %post doc
 %install_info --info-dir=%{_infodir} %{_infodir}/ocaml.info.gz
@@ -125,6 +151,7 @@ install -m 644 infoman/ocaml.info*.gz %{buildroot}%{_infodir}
 %exclude %{_bindir}/mkcamlp4
 %exclude %{_bindir}/labltk
 %exclude %{_bindir}/ocamlbrowser
+%exclude %{_bindir}/ocamltags
 %exclude %{_libdir}/ocaml/camlp4
 %exclude %{_libdir}/ocaml/labltk
 %exclude %{_libdir}/ocaml/stublibs/dlllabltk.so
@@ -150,7 +177,16 @@ install -m 644 infoman/ocaml.info*.gz %{buildroot}%{_infodir}
 %doc otherlibs/labltk/examples_camltk
 %doc otherlibs/labltk/examples_labltk
 
+%files emacs
+%{_bindir}/ocamltags
+%{emacs_lispdir}/caml-mode
+%{emacs_startdir}/*
+
 %changelog
+* Fri Aug 23 2013 holgerar@gmail.com - 4.00.1-5
+- Add new subpackage ocaml-emacs providing the Emacs modes and the
+  ocamltags program distributed with OCaml.
+
 * Tue Aug 13 2013 holgerar@gmail.com - 4.00.1-4
 - Remove build dependency on gdbm-devel because the dbm library is no
   longer part of OCaml.

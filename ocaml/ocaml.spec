@@ -17,31 +17,32 @@
 # ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.
 
+%global __ocaml_requires_opts -c -f "%{buildroot}%{_bindir}/ocamlrun %{buildroot}%{_bindir}/ocamlobjinfo"
+%global __ocaml_provides_opts -f "%{buildroot}%{_bindir}/ocamlrun %{buildroot}%{_bindir}/ocamlobjinfo"
+
 %global ocamlver 4.00
 %global ocamlrel 1
 
-Name:             ocaml
-Summary:          The OCaml compiler and programming environment
-Version:          %{ocamlver}.%{ocamlrel}
-Release:          4
-License:          QPL-1.0 with exceptions and LGPL-2.0 with exceptions
-Group:            Development/Languages/Other
-Url:              http://caml.inria.fr/ocaml
-Source0:          http://caml.inria.fr/pub/distrib/ocaml-%{ocamlver}/ocaml-%{version}.tar.bz2
-Source1:          http://caml.inria.fr/pub/distrib/ocaml-%{ocamlver}/ocaml-%{ocamlver}-refman-html.tar.gz
-Source2:          http://caml.inria.fr/pub/distrib/ocaml-%{ocamlver}/ocaml-%{ocamlver}-refman.info.tar.gz
-Patch0:           ocaml-cflags.patch
-BuildRoot:        %{_tmppath}/%{name}-%{version}-build
-BuildRequires:    binutils-devel
-BuildRequires:    ncurses-devel
-BuildRequires:    xorg-x11-devel
-BuildRequires:    tcl-devel
-BuildRequires:    tk-devel
-Provides:         ocaml(compiler) = %{version}
-Provides:         ocaml(runtime) = %{version}
+Name: ocaml
+Summary: The OCaml compiler and programming environment
+Version: %{ocamlver}.%{ocamlrel}
+Release: 4
+License: QPL-1.0 with exceptions and LGPL-2.0 with exceptions
+Group: Development/Languages/Other
+Url: http://caml.inria.fr/ocaml
+Provides: ocaml(compiler) = %{version}
+Provides: ocaml(runtime) = %{version}
 
-%global __ocaml_requires_opts -c -f "%{buildroot}%{_bindir}/ocamlrun %{buildroot}%{_bindir}/ocamlobjinfo"
-%global __ocaml_provides_opts -f "%{buildroot}%{_bindir}/ocamlrun %{buildroot}%{_bindir}/ocamlobjinfo"
+Source0: http://caml.inria.fr/pub/distrib/ocaml-%{ocamlver}/ocaml-%{version}.tar.bz2
+Source1: http://caml.inria.fr/pub/distrib/ocaml-%{ocamlver}/ocaml-%{ocamlver}-refman-html.tar.gz
+Source2: http://caml.inria.fr/pub/distrib/ocaml-%{ocamlver}/ocaml-%{ocamlver}-refman.info.tar.gz
+Patch0: ocaml-cflags.patch
+
+BuildRequires: binutils-devel
+BuildRequires: ncurses-devel
+BuildRequires: xorg-x11-devel
+BuildRequires: tcl-devel
+BuildRequires: tk-devel
 
 %description
 OCaml is a strongly typed functional programming language featuring
@@ -54,10 +55,10 @@ lexer and parser generators, a dependency generator, a build tool,
 a documentation generator, an interactive debugger, and a profiler.
 
 %package doc
-Summary:          Documentation for the OCaml system
-BuildArch:        noarch
-Requires(post):   info
-Requires(preun):  info
+Summary: Documentation for the OCaml system
+Requires(post): info
+Requires(preun): info
+BuildArch: noarch
 
 %description doc
 OCaml is a strongly typed functional programming language featuring
@@ -67,8 +68,8 @@ system, and a fully-fledged object-oriented layer.
 This package contains documentation for the OCaml system.
 
 %package camlp4
-Summary:          Preprocessor-pretty-printer for OCaml
-Requires:         ocaml = %{version}-%{release}
+Summary: Preprocessor-pretty-printer for OCaml
+Requires: ocaml = %{version}-%{release}
 
 %description camlp4
 CamlP4 is a tool for OCaml that combines a preprocessor for the OCaml
@@ -77,10 +78,10 @@ the syntax of the input language and to pretty-print OCaml programs
 using different syntaxes.
 
 %package labltk
-Summary:          OCaml interface to the Tcl/Tk GUI library
-Requires:         ocaml = %{version}-%{release}
-Requires:         tcl-devel
-Requires:         tk-devel
+Summary: OCaml interface to the Tcl/Tk GUI library
+Requires: ocaml = %{version}-%{release}
+Requires: tcl-devel
+Requires: tk-devel
 
 %description labltk
 The labltk library provides an OCaml interface to the Tcl/Tk GUI
@@ -115,15 +116,11 @@ install -m 644 infoman/ocaml.info*.gz %{buildroot}%{_infodir}
 %postun doc
 %install_info_delete --info-dir=%{_infodir} %{_infodir}/ocaml.info.gz
 
-%clean
-rm -rf %{buildroot}
-
 %files
-%defattr(-,root,root)
-%doc README LICENSE Changes
 %{_bindir}/*
 %{_libdir}/ocaml
 %doc %{_mandir}/man1/*
+%doc README LICENSE Changes
 %exclude %{_bindir}/camlp4*
 %exclude %{_bindir}/mkcamlp4
 %exclude %{_bindir}/labltk
@@ -134,13 +131,11 @@ rm -rf %{buildroot}
 %exclude %{_mandir}/man1/camlp4*
 
 %files doc
-%defattr(-,root,root)
 %doc %{_mandir}/man3/*
 %doc %{_infodir}/*
 %doc htmlman
 
 %files camlp4
-%defattr(-,root,root)
 %{_bindir}/camlp4*
 %{_bindir}/mkcamlp4
 %{_libdir}/ocaml/camlp4
@@ -148,7 +143,6 @@ rm -rf %{buildroot}
 %doc camlp4/examples
 
 %files labltk
-%defattr(-,root,root)
 %{_bindir}/labltk
 %{_bindir}/ocamlbrowser
 %{_libdir}/ocaml/labltk

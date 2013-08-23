@@ -1,4 +1,4 @@
-# Copyright 2011, 2012 Holger Arnold.
+# Copyright 2011, 2012, 2013 Holger Arnold.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -22,7 +22,7 @@
 Name:             emacs-%{pkg}
 Summary:          Emacs interface to Git
 Version:          1.2.0
-Release:          1
+Release:          2
 License:          GPL-3.0+ and GFDL-1.2+
 Group:            Productivity/Editors/Emacs
 Url:              http://philjackson.github.com/magit/
@@ -30,7 +30,7 @@ Source:           http://github.com/downloads/magit/magit/%{pkg}-%{version}.tar.
 BuildRoot:        %{_tmppath}/%{name}-%{version}-build
 BuildArch:        noarch
 BuildRequires:    emacs
-BuildRequires:    texinfo
+BuildRequires:    makeinfo
 Requires(post):   info
 Requires(preun):  info
 Requires:         emacs
@@ -83,14 +83,17 @@ rm -rf %{buildroot}
 %{emacs_lispdir}/%{pkg}/*.el
 
 %changelog
+* Thu Aug 22 2013 holgerar@gmail.com - 1.2.0-2
+- Change build dependency on texinfo to makeinfo.
+
 * Mon Nov 12 2012 holgerar@gmail.com - 1.2.0-1
-- Update to version 1.2.0
+- Update to version 1.2.0.
 
 * Thu Sep 06 2012 holgerar@gmail.com - 1.1.1-2
-- Drop build dependency on python-markdown
+- Drop build dependency on python-markdown.
 
 * Wed Feb 29 2012 holgerar@gmail.com - 1.1.1-1
-- Update to version 1.1.1
+- Update to version 1.1.1.
 
 * Thu Feb 09 2012 holgerar@gmail.com - 1.0.0-3
-- Create package for version 1.0.0
+- Create package for version 1.0.0.

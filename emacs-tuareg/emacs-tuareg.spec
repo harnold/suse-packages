@@ -20,19 +20,17 @@
 %global emacs_lispdir  %{_datadir}/emacs/site-lisp
 %global emacs_startdir %{_datadir}/emacs/site-lisp/site-start.d
 
-%global pkg tuareg
-
-Name: emacs-%{pkg}
+Name: emacs-tuareg
 Summary: OCaml editing mode for Emacs
-Version: 2.0.4
-Release: 4
+Version: 2.0.6
+Release: 1
 License: GPL-2.0+
 Group: Productivity/Editors/Emacs
 Url: http://tuareg.forge.ocamlcore.org/
 Requires: emacs
+Requires: ocaml-emacs
 
-Source0: http://forge.ocamlcore.org/frs/download.php/514/%{pkg}-%{version}.tgz
-Source1: http://forge.ocamlcore.org/frs/download.php/516/tuareg-caml-mode.tar.gz
+Source0: http://forge.ocamlcore.org/frs/download.php/514/tuareg-%{version}.tar.gz
 
 BuildArch: noarch
 BuildRequires: emacs
@@ -43,29 +41,30 @@ indentation and highlighting of Objective Caml sources and supports
 running an OCaml toplevel and the OCaml debugger from within Emacs.
 
 %prep
-%setup -q -T -b 0 -n %{pkg}-%{version}
-%setup -q -T -D -a 1 -n %{pkg}-%{version}
+%setup -q -n tuareg-%{version}
 
 %build
-mv tuareg-caml-mode/*.el .
-emacs --no-init-file --no-site-file --batch -L . -f batch-byte-compile \
-    caml-emacs.el caml-help.el caml-types.el tuareg.el camldebug.el
+rm tuareg-pkg.el
+emacs --no-init-file --no-site-file --batch -L . -f batch-byte-compile *.el
+emacs --no-init-file --no-site-file --batch \
+    --eval '(setq generated-autoload-file "'$(pwd)'/51-tuareg-mode.el")' \
+    -f batch-update-autoloads "."
 
 %install
-install -d %{buildroot}%{emacs_lispdir}/%{pkg}
-install -m 644 \
-    caml-emacs.el{c,} caml-help.el{c,} caml-types.el{c,} \
-    tuareg.el{c,} camldebug.el{c,} \
-    %{buildroot}%{emacs_lispdir}/%{pkg}
+install -d %{buildroot}%{emacs_lispdir}/tuareg-mode
+install -m 644 tuareg.el{c,} ocamldebug.el{c,} %{buildroot}%{emacs_lispdir}/tuareg-mode
 install -d %{buildroot}%{emacs_startdir}
-install -m 644 append-tuareg.el %{buildroot}%{emacs_startdir}/init-%{pkg}.el
+install -m 644 51-tuareg-mode.el %{buildroot}%{emacs_startdir}
 
 %files
-%doc COPYING HISTORY README
+%doc README
+%{emacs_lispdir}/tuareg-mode
 %{emacs_startdir}/*.el
-%{emacs_lispdir}/%{pkg}/*.elc
-%{emacs_lispdir}/%{pkg}/*.el
 
 %changelog
+* Sat Aug 24 2013 holgerar@gmail.com - 2.0.6-1
+- Update to version 2.0.6
+- The package now depends on the ocaml-emacs package.
+
 * Sat Feb 11 2012 holgerar@gmail.com - 2.0.4-3
 - Create package for version 2.0.4

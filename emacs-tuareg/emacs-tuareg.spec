@@ -1,4 +1,4 @@
-# Copyright 2009-2012 Holger Arnold.
+# Copyright 2009-2013 Holger Arnold.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -17,29 +17,30 @@
 # ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.
 
+%global emacs_lispdir  %{_datadir}/emacs/site-lisp
+%global emacs_startdir %{_datadir}/emacs/site-lisp/site-start.d
+
 %global pkg tuareg
 
-Name:             emacs-%{pkg}
-Summary:          OCaml editing mode for Emacs
-Version:          2.0.4
-Release:          4
-License:          GPL-2.0+
-Group:            Productivity/Editors/Emacs
-Url:              http://tuareg.forge.ocamlcore.org/
-Source0:          http://forge.ocamlcore.org/frs/download.php/514/%{pkg}-%{version}.tgz
-Source1:          http://forge.ocamlcore.org/frs/download.php/516/tuareg-caml-mode.tar.gz
-BuildRoot:        %{_tmppath}/%{name}-%{version}-build
-BuildArch:        noarch
-BuildRequires:    emacs
-Requires:         emacs
+Name: emacs-%{pkg}
+Summary: OCaml editing mode for Emacs
+Version: 2.0.4
+Release: 4
+License: GPL-2.0+
+Group: Productivity/Editors/Emacs
+Url: http://tuareg.forge.ocamlcore.org/
+Requires: emacs
+
+Source0: http://forge.ocamlcore.org/frs/download.php/514/%{pkg}-%{version}.tgz
+Source1: http://forge.ocamlcore.org/frs/download.php/516/tuareg-caml-mode.tar.gz
+
+BuildArch: noarch
+BuildRequires: emacs
 
 %description
 Tuareg is an OCaml editing mode for Emacs.  It provides automatic
 indentation and highlighting of Objective Caml sources and supports
 running an OCaml toplevel and the OCaml debugger from within Emacs.
-
-%global emacs_lispdir  %{_datadir}/emacs/site-lisp
-%global emacs_startdir %{_datadir}/emacs/site-lisp/site-start.d
 
 %prep
 %setup -q -T -b 0 -n %{pkg}-%{version}
@@ -59,11 +60,7 @@ install -m 644 \
 install -d %{buildroot}%{emacs_startdir}
 install -m 644 append-tuareg.el %{buildroot}%{emacs_startdir}/init-%{pkg}.el
 
-%clean
-rm -rf %{buildroot}
-
 %files
-%defattr(-,root,root)
 %doc COPYING HISTORY README
 %{emacs_startdir}/*.el
 %{emacs_lispdir}/%{pkg}/*.elc

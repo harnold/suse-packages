@@ -17,24 +17,23 @@
 # ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.
 
-%global pkg magit
+Name: emacs-magit
+Summary: Emacs interface to Git
+Version: 1.2.0
+Release: 2
+License: GPL-3.0+ and GFDL-1.2+
+Group: Productivity/Editors/Emacs
+Url: http://philjackson.github.com/magit/
+Requires(post): info
+Requires(preun): info
+Requires: emacs
+Requires: git-core
 
-Name:             emacs-%{pkg}
-Summary:          Emacs interface to Git
-Version:          1.2.0
-Release:          2
-License:          GPL-3.0+ and GFDL-1.2+
-Group:            Productivity/Editors/Emacs
-Url:              http://philjackson.github.com/magit/
-Source:           http://github.com/downloads/magit/magit/%{pkg}-%{version}.tar.gz
-BuildRoot:        %{_tmppath}/%{name}-%{version}-build
-BuildArch:        noarch
-BuildRequires:    emacs
-BuildRequires:    makeinfo
-Requires(post):   info
-Requires(preun):  info
-Requires:         emacs
-Requires:         git-core
+Source: http://github.com/downloads/magit/magit/magit-%{version}.tar.gz
+
+BuildArch: noarch
+BuildRequires: emacs
+BuildRequires: makeinfo
 
 %description
 Magit is an Emacs interface to the Git version control system.
@@ -44,7 +43,7 @@ It provides convenient access to the most common Git operations.
 %global emacs_startdir %{_datadir}/emacs/site-lisp/site-start.d
 
 %prep
-%setup -q -n %{pkg}-%{version}
+%setup -q -n magit-%{version}
 
 %build
 make PREFIX=/usr
@@ -54,11 +53,10 @@ makeinfo --html --no-split magit.texi
 mv README.md README
 
 %install
-install -d %{buildroot}%{emacs_lispdir}/%{pkg}
-install -m 644 magit*.el{c,} %{buildroot}%{emacs_lispdir}/%{pkg}
-install -m 644 contrib/magit*.el{c,} %{buildroot}%{emacs_lispdir}/%{pkg}
+install -d %{buildroot}%{emacs_lispdir}/magit
+install -m 644 magit*.el{c,} contrib/magit*.el %{buildroot}%{emacs_lispdir}/magit
 install -d %{buildroot}%{emacs_startdir}
-install -m 644 50magit.el %{buildroot}%{emacs_startdir}/init-%{pkg}.el
+install -m 644 50magit.el %{buildroot}%{emacs_startdir}/init-magit.el
 install -d %{buildroot}%{_infodir}
 install -m 644 magit.info.gz %{buildroot}%{_infodir}
 install -d %{buildroot}%{_bindir}
@@ -70,17 +68,12 @@ install -m 755 contrib/magit %{buildroot}%{_bindir}
 %postun
 %install_info_delete --info-dir=%{_infodir} %{_infodir}/magit.info.gz
 
-%clean
-rm -rf %{buildroot}
-
 %files
-%defattr(-,root,root)
 %doc README magit.html
 %doc %{_infodir}/magit.info.gz
 %{_bindir}/magit
+%{emacs_lispdir}/magit
 %{emacs_startdir}/*.el
-%{emacs_lispdir}/%{pkg}/*.elc
-%{emacs_lispdir}/%{pkg}/*.el
 
 %changelog
 * Thu Aug 22 2013 holgerar@gmail.com - 1.2.0-2

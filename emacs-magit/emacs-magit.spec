@@ -20,7 +20,7 @@
 Name: emacs-magit
 Summary: Emacs interface to Git
 Version: 1.2.0
-Release: 3
+Release: 4
 License: GPL-3.0+ and GFDL-1.2+
 Group: Productivity/Editors/Emacs
 Url: http://philjackson.github.com/magit/
@@ -54,7 +54,7 @@ mv README.md README
 
 %install
 install -d %{buildroot}%{emacs_lispdir}/magit
-install -m 644 *.el{c,} contrib/*.el %{buildroot}%{emacs_lispdir}/magit
+install -m 644 magit*.el{c,} rebase-mode.el{c,} contrib/*.el %{buildroot}%{emacs_lispdir}/magit
 install -d %{buildroot}%{emacs_startdir}
 install -m 644 50magit.el %{buildroot}%{emacs_startdir}/50-magit.el
 install -d %{buildroot}%{_infodir}
@@ -76,7 +76,7 @@ install -m 755 contrib/magit %{buildroot}%{_bindir}
 %{emacs_startdir}/*.el
 
 %changelog
-* Sun Aug 25 2013 holgerar@gmail.com - 1.2.0-3
+* Sun Aug 25 2013 holgerar@gmail.com - 1.2.0-4
 - Include rebase-mode.
 
 * Thu Aug 22 2013 holgerar@gmail.com - 1.2.0-2

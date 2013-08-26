@@ -19,20 +19,24 @@
 
 %global emacs_sitedir   %{_datadir}/emacs/site-lisp
 %global emacs_startdir  %{_datadir}/emacs/site-lisp/site-start.d
+%global vim_sitedir     %{_datadir}/vim/site
 
 Name: gtypist
 Summary: Universal typing tutor
-Version: 2.9
-Release: 2
+Version: 2.9.3
+Release: 1
 License: GPL-3.0
 Group: Amusements/Teaching/Other
 Url: http://www.gnu.org/software/gtypist/
+Requires: emacs
+Requires: vim-base
 Requires(post): info
 Requires(preun): info
 
 Source0: http://ftp.gnu.org/gnu/gtypist/%{name}-%{version}.tar.xz
-Source1: init-gtypist.el
+Source1: 50-gtypist-mode.el
 
+BuildRequires: emacs
 BuildRequires: ncurses-devel
 
 %description
@@ -56,6 +60,9 @@ gzip -9 %{buildroot}%{_infodir}/*.info
 install -d %{buildroot}%{emacs_startdir}
 install -m 644 %{SOURCE1} %{buildroot}%{emacs_startdir}
 
+install -d %{buildroot}%{vim_sitedir}/syntax
+install -m 644 tools/gtypist.vim %{buildroot}%{vim_sitedir}/syntax
+
 install -d %{buildroot}%{_datadir}/%{name}/tools
 install -m 644 tools/gtypist.pm %{buildroot}%{_datadir}/%{name}/tools
 install -m 755 tools/{findwords,ktouch2typ.pl,tt2typ.pl,typcombine,typv1tov2} %{buildroot}%{_datadir}/%{name}/tools
@@ -72,11 +79,19 @@ install -m 755 tools/{findwords,ktouch2typ.pl,tt2typ.pl,typcombine,typv1tov2} %{
 %{_datadir}/locale/*/*/gtypist.mo
 %{emacs_sitedir}/*
 %{emacs_startdir}/*
+%{vim_sitedir}/syntax/*
 %doc %{_infodir}/gtypist*
 %doc %{_mandir}/*/*
 %doc ChangeLog COPYING NEWS QUESTIONS README THANKS TODO
 
 %changelog
+* Mon Aug 26 2013 holgerar@gmail.com - 2.9.3-1
+- Update to version 2.9.3:
+  * Vim syntax highlighting for GTypist files.
+  * Some bug fixes.
+- Add runtime dependencies on emacs and vim-base.
+- Add build dependency on emacs.
+
 * Thu Nov 22 2012 holgerar@gmail.com - 2.9-2
 - Install additional tools for creating and converting Typist files.
 - Auto-load gtypist-mode when editing Typist files in Emacs.

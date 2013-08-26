@@ -1,4 +1,4 @@
-# Copyright 2011, 2012 Holger Arnold.
+# Copyright 2011, 2012, 2013 Holger Arnold.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -17,22 +17,23 @@
 # ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.
 
-Name:             gtypist
-Summary:          Universal typing tutor
-Version:          2.9
-Release:          2
-License:          GPL-3.0
-Group:            Amusements/Teaching/Other
-Url:              http://www.gnu.org/software/gtypist/
-Source0:          http://ftp.gnu.org/gnu/gtypist/%{name}-%{version}.tar.xz
-Source1:          init-gtypist.el
-BuildRoot:        %{_tmppath}/%{name}-%{version}-build
-BuildRequires:    ncurses-devel
-Requires(post):   info
-Requires(preun):  info
-
 %global emacs_sitedir   %{_datadir}/emacs/site-lisp
 %global emacs_startdir  %{_datadir}/emacs/site-lisp/site-start.d
+
+Name: gtypist
+Summary: Universal typing tutor
+Version: 2.9
+Release: 2
+License: GPL-3.0
+Group: Amusements/Teaching/Other
+Url: http://www.gnu.org/software/gtypist/
+Requires(post): info
+Requires(preun): info
+
+Source0: http://ftp.gnu.org/gnu/gtypist/%{name}-%{version}.tar.xz
+Source1: init-gtypist.el
+
+BuildRequires: ncurses-devel
 
 %description
 GNU Typist is a text mode typing tutor.  You can learn correct typing with
@@ -65,11 +66,7 @@ install -m 755 tools/{findwords,ktouch2typ.pl,tt2typ.pl,typcombine,typv1tov2} %{
 %postun
 %install_info_delete --info-dir=%{_infodir} %{_infodir}/gtypist.info.gz
 
-%clean
-rm -rf %{buildroot}
-
 %files
-%defattr(-,root,root)
 %{_bindir}/*
 %{_datadir}/%{name}
 %{_datadir}/locale/*/*/gtypist.mo

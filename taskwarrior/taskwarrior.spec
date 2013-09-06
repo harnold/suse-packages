@@ -17,21 +17,21 @@
 # ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.
 
+%global vim_sitedir     %{_datadir}/vim/site
+
 Name: taskwarrior
 Summary: Command-line todo list manager
 Version: 2.2.0
-Release: 1
+Release: 2
 License: MIT
 Group: Productivity/Other
 Url: http://taskwarrior.org/
 
 Source0: http://www.taskwarrior.org/download/task-%{version}.tar.gz
+Patch0: taskwarrior-datadir.patch
 
 BuildRequires: cmake
 BuildRequires: libuuid-devel
-
-%global vim_sitedir     %{_datadir}/vim/site
-%global task_datadir    %{_datadir}/%{name}
 
 %description
 Taskwarrior maintains a list of tasks that you want to do, allowing
@@ -42,37 +42,28 @@ synching and more.
 
 %prep
 %setup -q -n task-%{version}
+%patch -P 0 -p1
 
 %build
 cmake . -DCMAKE_INSTALL_PREFIX=%{_prefix} \
-        -DTASK_DOCDIR=share/doc/packages/%{name}
+        -DTASK_DOCDIR=share/doc/packages/%{name} \
+        -DTASK_DATADIR=share/%{name}
 make %{?_smp_mflags}
 
 %install
 %make_install
 
-# Install data files
-install -d %{buildroot}/%{task_datadir}
-mv %{buildroot}%{_docdir}/%{name}/scripts/add-ons %{buildroot}%{task_datadir}
-mv %{buildroot}%{_docdir}/%{name}/i18n %{buildroot}%{task_datadir}
-mv %{buildroot}%{_docdir}/%{name}/rc %{buildroot}%{task_datadir}
-sed -i "s|\.\./\.\./scripts|%{task_datadir}|" %{buildroot}%{task_datadir}/rc/refresh
-
 # Bash completion
 install -d %{buildroot}%{_sysconfdir}/bash_completion.d
-mv %{buildroot}/%{_docdir}/%{name}/scripts/bash/task.sh %{buildroot}%{_sysconfdir}/bash_completion.d
+cp %{buildroot}/%{_datadir}/%{name}/scripts/bash/task.sh %{buildroot}%{_sysconfdir}/bash_completion.d
 
 # Vim
-install -d %{buildroot}%{_datadir}/vim/site/{ftdetect,syntax}
+install -d %{buildroot}%{vim_sitedir}/{ftdetect,syntax}
 install -m 644 scripts/vim/ftdetect/*.vim %{buildroot}%{vim_sitedir}/ftdetect
 install -m 644 scripts/vim/syntax/*.vim %{buildroot}%{vim_sitedir}/syntax
 
-# Reference documentation
-install -d %{buildroot}%{_docdir}/%{name}
-install -m 644 doc/ref/task-ref.pdf %{buildroot}%{_docdir}/%{name}
-
 # Remove unused files
-rm -r %{buildroot}%{_docdir}/%{name}/scripts
+rm %{buildroot}%{_datadir}/%{name}/rc/refresh
 rm %{buildroot}%{_docdir}/%{name}/INSTALL
 
 %files
@@ -84,6 +75,9 @@ rm %{buildroot}%{_docdir}/%{name}/INSTALL
 %{vim_sitedir}/*/*
 
 %changelog
+* Fri Sep 06 2013 holgerar@gmail.com - 2.2.0-2
+- Use correct paths in default ~/.taskrc file.
+
 * Wed Aug 21 2013 holgerar@gmail.com - 2.2.0-1
 - Update to version 2.2.0:
   * Task states such as BLOCKED, OVERDUE, WAITING, etc. can be queried

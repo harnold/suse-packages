@@ -1,0 +1,64 @@
+From: Holger Arnold <holgerar@gmail.com>
+Date: 2013-09-06 13:30:00 +0200
+Subject: Install scripts in data directory
+Upstream: tbd
+
+Scripts, color schemes, and similar files should be installed under the
+data directory, not the doc directory.
+
+--- task-2.2.0.old/cmake.h.in	2013-04-07 22:12:22.000000000 +0200
++++ task-2.2.0.new/cmake.h.in	2013-09-06 13:03:43.211274768 +0200
+@@ -12,7 +12,7 @@
+ #define PACKAGE_STRING    "${PACKAGE_STRING}"
+ 
+ /* Installation details */
+-#define TASK_RCDIR "${CMAKE_INSTALL_PREFIX}/${TASK_DOCDIR}/rc"
++#define TASK_RCDIR "${CMAKE_INSTALL_PREFIX}/${TASK_DATADIR}/rc"
+ 
+ /* Localization */
+ #define PACKAGE_LANGUAGE  ${PACKAGE_LANGUAGE}
+diff -u -r -x '*~' task-2.2.0.old/CMakeLists.txt task-2.2.0.new/CMakeLists.txt
+--- task-2.2.0.old/CMakeLists.txt	2013-04-07 22:12:22.000000000 +0200
++++ task-2.2.0.new/CMakeLists.txt	2013-09-06 13:02:35.910273596 +0200
+@@ -13,6 +13,7 @@
+ SET (TASK_MAN5DIR share/man/man5 CACHE STRING "Installation directory for man pages, section 5")
+ SET (TASK_DOCDIR  share/doc/task CACHE STRING "Installation directory for doc files")
+ SET (TASK_BINDIR  bin            CACHE STRING "Installation directory for the binary")
++SET (TASK_DATADIR share/task     CACHE STRING "Installation directory for data files")
+ 
+ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+   set (LINUX true)
+diff -u -r -x '*~' task-2.2.0.old/doc/CMakeLists.txt task-2.2.0.new/doc/CMakeLists.txt
+--- task-2.2.0.old/doc/CMakeLists.txt	2013-04-07 22:12:22.000000000 +0200
++++ task-2.2.0.new/doc/CMakeLists.txt	2013-09-06 13:17:16.976136361 +0200
+@@ -11,6 +11,6 @@
+                                                       FILES_MATCHING PATTERN "*.1")
+ install (DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/man/   DESTINATION ${TASK_MAN5DIR}
+                                                       FILES_MATCHING PATTERN "*.5")
+-install (DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/rc     DESTINATION ${TASK_DOCDIR})
++install (DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/rc     DESTINATION ${TASK_DATADIR})
+ 
+ install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/ref/task-ref.pdf DESTINATION ${TASK_DOCDIR})
+diff -u -r -x '*~' task-2.2.0.old/i18n/CMakeLists.txt task-2.2.0.new/i18n/CMakeLists.txt
+--- task-2.2.0.old/i18n/CMakeLists.txt	2013-04-07 22:12:22.000000000 +0200
++++ task-2.2.0.new/i18n/CMakeLists.txt	2013-09-06 13:04:03.912275128 +0200
+@@ -1,4 +1,4 @@
+ cmake_minimum_required (VERSION 2.8)
+-install (DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/ DESTINATION ${TASK_DOCDIR}/i18n
++install (DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/ DESTINATION ${TASK_DATADIR}/i18n
+                                                 FILES_MATCHING REGEX "tips.*"
+                                                                PATTERN "CMakeFiles" EXCLUDE)
+diff -u -r -x '*~' task-2.2.0.old/scripts/CMakeLists.txt task-2.2.0.new/scripts/CMakeLists.txt
+--- task-2.2.0.old/scripts/CMakeLists.txt	2013-04-07 22:12:22.000000000 +0200
++++ task-2.2.0.new/scripts/CMakeLists.txt	2013-09-06 13:05:51.132354785 +0200
+@@ -1,8 +1,8 @@
+ cmake_minimum_required (VERSION 2.8)
+ install (DIRECTORY bash fish vim zsh
+-         DESTINATION ${TASK_DOCDIR}/scripts)
++         DESTINATION ${TASK_DATADIR}/scripts)
+ install (DIRECTORY add-ons
+-         DESTINATION ${TASK_DOCDIR}/scripts
++         DESTINATION ${TASK_DATADIR}/scripts
+          FILE_PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE
+                           GROUP_READ             GROUP_EXECUTE
+                           WORLD_READ             WORLD_EXECUTE)

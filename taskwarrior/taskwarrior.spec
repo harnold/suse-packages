@@ -17,19 +17,18 @@
 # ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.
 
-%global pkg task
+Name: taskwarrior
+Summary: Command-line todo list manager
+Version: 2.2.0
+Release: 1
+License: MIT
+Group: Productivity/Other
+Url: http://taskwarrior.org/
 
-Name:           taskwarrior
-Summary:        Command-line todo list manager
-Version:        2.2.0
-Release:        1
-License:        MIT
-Group:          Productivity/Other
-Url:            http://taskwarrior.org/
-Source0:        http://www.taskwarrior.org/download/%{pkg}-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-build
-BuildRequires:  cmake
-BuildRequires:  libuuid-devel
+Source0: http://www.taskwarrior.org/download/task-%{version}.tar.gz
+
+BuildRequires: cmake
+BuildRequires: libuuid-devel
 
 %global vim_sitedir     %{_datadir}/vim/site
 %global task_datadir    %{_datadir}/%{name}
@@ -42,7 +41,7 @@ with it.  It has customizable reports, charts, GTD features, device
 synching and more.
 
 %prep
-%setup -q -n %{pkg}-%{version}
+%setup -q -n task-%{version}
 
 %build
 cmake . -DCMAKE_INSTALL_PREFIX=%{_prefix} \
@@ -76,11 +75,7 @@ install -m 644 doc/ref/task-ref.pdf %{buildroot}%{_docdir}/%{name}
 rm -r %{buildroot}%{_docdir}/%{name}/scripts
 rm %{buildroot}%{_docdir}/%{name}/INSTALL
 
-%clean
-rm -rf %{buildroot}
-
 %files
-%defattr(-,root,root)
 %{_bindir}/*
 %{_datadir}/%{name}
 %{_mandir}/*/*

@@ -40,6 +40,7 @@ or http://www.opensoundcontrol.org.
 %package devel
 Summary: Development files for liblo
 Group: Development/Languages/C and C++
+Requires: %{name} = %{version}-%{release}
 
 %description devel
 This package provides the development files for liblo.

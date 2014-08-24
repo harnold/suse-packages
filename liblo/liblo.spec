@@ -54,6 +54,12 @@ make %{?_smp_mflags}
 %install
 %make_install
 
+%post
+/sbin/ldconfig
+
+%postun
+/sbin/ldconfig
+
 %files
 %{_bindir}/*
 %{_libdir}/liblo.so.*

@@ -23,7 +23,7 @@
 Name: suil
 Summary: Lightweight C library for loading and wrapping LV2 plugin UIs
 Version: 0.8.2
-Release: 2
+Release: 3
 License: ISC
 Url: http://drobilla.net/software/suil/
 
@@ -36,11 +36,7 @@ BuildRequires: lv2-devel
 BuildRequires: python
 
 %description
-Suil makes it possible to load a UI of any toolkit in a host using any
-other toolkit (assuming the toolkits are both supported by Suil).  Hosts
-do not need to build against or link to foreign toolkit libraries to use
-UIs written with that toolkit; all the necessary magic is performed by
-dynamically loaded modules.
+Lightweight C library for loading and wrapping LV2 plugin UIs.
 
 %package -n %{pkg}
 Summary: Lightweight C library for loading and wrapping LV2 plugin UIs
@@ -64,13 +60,7 @@ Group: System/Libraries
 Requires: %{pkg} = %{version}-%{release}
 
 %description -n %{pkg}-gtk2_in_qt4
-Suil makes it possible to load a UI of any toolkit in a host using any
-other toolkit (assuming the toolkits are both supported by Suil).  Hosts
-do not need to build against or link to foreign toolkit libraries to use
-UIs written with that toolkit; all the necessary magic is performed by
-dynamically loaded modules.
-
-This packages enables loading plugins using GTK2 UIs in Qt4 hosts.
+This packages enables Suil to load plugins using GTK2 UIs in Qt4 hosts.
 
 %package -n %{pkg}-x11_in_qt4
 Summary: Lightweight C library for loading and wrapping LV2 plugin UIs
@@ -78,13 +68,7 @@ Group: System/Libraries
 Requires: %{pkg} = %{version}-%{release}
 
 %description -n %{pkg}-x11_in_qt4
-Suil makes it possible to load a UI of any toolkit in a host using any
-other toolkit (assuming the toolkits are both supported by Suil).  Hosts
-do not need to build against or link to foreign toolkit libraries to use
-UIs written with that toolkit; all the necessary magic is performed by
-dynamically loaded modules.
-
-This package enables loading plugins using X11 UIs in Qt4 hosts.
+This package enables Suil to load plugins using X11 UIs in Qt4 hosts.
 
 %package -n %{pkg}-qt4_in_gtk2
 Summary: Lightweight C library for loading and wrapping LV2 plugin UIs
@@ -92,13 +76,7 @@ Group: System/Libraries
 Requires: %{pkg} = %{version}-%{release}
 
 %description -n %{pkg}-qt4_in_gtk2
-Suil makes it possible to load a UI of any toolkit in a host using any
-other toolkit (assuming the toolkits are both supported by Suil).  Hosts
-do not need to build against or link to foreign toolkit libraries to use
-UIs written with that toolkit; all the necessary magic is performed by
-dynamically loaded modules.
-
-This package enables loading plugins using Qt4 UIs in GTK2 hosts.
+This package enables Suil to load plugins using Qt4 UIs in GTK2 hosts.
 
 %package -n %{pkg}-x11_in_gtk2
 Summary: Lightweight C library for loading and wrapping LV2 plugin UIs
@@ -106,13 +84,7 @@ Group: System/Libraries
 Requires: %{pkg} = %{version}-%{release}
 
 %description -n %{pkg}-x11_in_gtk2
-Suil makes it possible to load a UI of any toolkit in a host using any
-other toolkit (assuming the toolkits are both supported by Suil).  Hosts
-do not need to build against or link to foreign toolkit libraries to use
-UIs written with that toolkit; all the necessary magic is performed by
-dynamically loaded modules.
-
-This package enables loading plugins using X11 UIs in GTK2 hosts.
+This package enables Suil to load plugins using X11 UIs in GTK2 hosts.
 
 %package -n %{pkg}-devel
 Summary: Development files for Suil
@@ -120,12 +92,6 @@ Group: Development/Libraries/C and C++
 Requires: %{pkg} = %{version}-%{release}
 
 %description -n %{pkg}-devel
-Suil makes it possible to load a UI of any toolkit in a host using any
-other toolkit (assuming the toolkits are both supported by Suil).  Hosts
-do not need to build against or link to foreign toolkit libraries to use
-UIs written with that toolkit; all the necessary magic is performed by
-dynamically loaded modules.
-
 This package provides the development files for Suil.
 
 %prep

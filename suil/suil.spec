@@ -18,12 +18,12 @@
 # DEALINGS IN THE SOFTWARE.
 
 %global maj 0
-%global pkg libsuil%{maj}
+%global pkg libsuil-%{maj}
 
 Name: suil
 Summary: Lightweight C library for loading and wrapping LV2 plugin UIs
 Version: 0.8.2
-Release: 1
+Release: 2
 License: ISC
 Url: http://drobilla.net/software/suil/
 
@@ -139,6 +139,8 @@ export CXXFLAGS="%{optflags}"; \
                 --libdir=%{_libdir} \
                 --docs
 ./waf
+
+%install
 ./waf install --destdir=%{buildroot}
 
 gzip -9 %{buildroot}/%{_mandir}/man3/suil.3
@@ -174,5 +176,5 @@ gzip -9 %{buildroot}/%{_mandir}/man3/suil.3
 %{_mandir}/man3/suil.3.gz
 
 %changelog
-* Sun Aug 24 2014 holgerar@gmail.com - 0.8.2-1
+* Sun Aug 24 2014 holgerar@gmail.com - 0.8.2-2
 - Create package for version 0.8.2.

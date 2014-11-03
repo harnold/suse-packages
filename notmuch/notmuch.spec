@@ -20,7 +20,7 @@
 Name: notmuch
 Summary: Thread-based email index, search and tagging
 Version: 0.18.2
-Release: 1
+Release: 2
 License: GPL-3.0+
 Group: Productivity/Networking/Email/Utilities
 Url: http://notmuchmail.org
@@ -55,6 +55,8 @@ Requires: mutt
 Requires: perl(Mail::Internet)
 Requires: perl(String::ShellQuote)
 Requires: perl(Term::ReadLine)
+Requires: perl(Term::ReadLine::Gnu)
+Requires: libreadline6
 BuildArch: noarch
 
 # Currently only available in devel:languages:perl
